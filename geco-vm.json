@@ -20,17 +20,17 @@
         "iso_checksum": "769474248a3897f4865817446f9a4a53",
         "iso_checksum_type": "md5",
 
-        "http_directory" : "provisioning",
+        "http_directory" : "ubuntu_64",
         "http_port_min" : 9001,
         "http_port_max" : 9001,
 
         "ssh_username": "{{user `ssh_name`}}",
         "ssh_password": "{{user `ssh_pass`}}",
-        "ssh_wait_timeout": "20m",
+        "ssh_wait_timeout": "40m",
 
         "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now",
 
-        "vm_name": "geco-vm",
+        "vm_name": "{{user `hostname`}}",
 
         "boot_command" : [
             "<esc><esc><enter><wait>",
