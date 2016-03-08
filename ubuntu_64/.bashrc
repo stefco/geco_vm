@@ -1,4 +1,4 @@
-export PATH=$PATH'/home/vagrant/bin'
+# export PATH=$PATH'/home/vagrant/bin'
 
 # This section was created during Vagrant provisioning. ASCII art courtesy
 # of http://patorjk.com/software/taag/
