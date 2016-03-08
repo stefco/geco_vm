@@ -82,6 +82,9 @@ printf '************************************************************************
 pip install -q --upgrade pip
 # build and install numpy first
 pip install -q "numpy>=1.9.1"
+# install ipython and jupyter
+pip install -q ipython
+pip install -q jupyter
 # install lscsoft
 echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft.list
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
@@ -130,3 +133,4 @@ add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
 apt-get -y -qq update
 apt-get -y -qq install julia
+julia --eval 'Pkg.add("IJulia")'
