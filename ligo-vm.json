@@ -63,5 +63,23 @@
         "inline": [
             "cd /home/{{user `ssh_name`}}/ && wget {{ .HTTPIP }}:{{ .HTTPPort }}/.bashrc"
         ]
-    }]
+    }],
+    "post-processors": [
+        [
+            {
+                "type": "vagrant",
+                "keep_input_artifact": false
+            },
+            {
+                "type": "atlas",
+                "only": ["virtualbox-iso"],
+                "artifact": "stefco/{{user `hostname`}}",
+                "artifact_type": "vagrant.box",
+                "metadata": {
+                    "provider": "virtualbox",
+                    "version": "0.0.1"
+                }
+            }
+        ]
+    ]
 }
