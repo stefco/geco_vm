@@ -1,0 +1,5 @@
+*.swp
+packer
+packer_cache
+*.box
+output-virtualbox-iso

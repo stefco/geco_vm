@@ -1,8 +1,8 @@
 {
     "variables": {
-        "ssh_name": "geco",
+        "ssh_name": "ligo",
         "ssh_pass": "password",
-        "hostname": "geco-vm"
+        "hostname": "ligo-vm"
     },
     "builders": [{
         "type": "virtualbox-iso",
@@ -57,6 +57,11 @@
         "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
         "scripts": [
             "provision.sh"
+        ]
+    },{
+        "type": "shell",
+        "inline": [
+            "cd /home/{{user `ssh_name`}}/ && wget {{ .HTTPIP }}:{{ .HTTPPort }}/.bashrc"
         ]
     }]
 }

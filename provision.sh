@@ -23,6 +23,14 @@ NDS2_CLIENT="http://software.ligo.org/lscsoft/source/nds2-client-${NDS2_CLIENT_V
 printf '************************************************************************\n'
 printf '*\n*\n* UPDATING \n*\n*\n'
 printf '************************************************************************\n'
+# necessary on this version of ubuntu due to hash sum difficulties.
+# see: https://github.com/mininet/mininet/issues/438
+# this works, but the following might come in handy
+# see: http://askubuntu.com/questions/311842/how-do-i-fix-apt-errors-w-failed-to-fetch-hash-sum-mismatch
+rm -rf /var/lib/apt/lists/*
+apt-get -y -qq update
+sync
+# shutdown -h now
 # update
 apt-get -y -qq update
 apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
@@ -81,9 +89,9 @@ echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt
 aptitude --no-gui -y -q update
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q lscsoft-all
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q nds2-client
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q lalapps
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps
 
 # THE BELOW SCRIPTS ALLOW BUILDING FROM SOURCE
 # # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
@@ -107,8 +115,11 @@ aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q lalap
 # pip install -q coveralls "pytest>=2.8" unittest2
 
 printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING UTILITIES \n*\n*\n'
+printf '*\n*\n* INSTALLING EXTRAS \n*\n*\n'
 printf '************************************************************************\n'
+apt-get -y -qq install curl
+apt-get -y -qq install wget
+apt-get -y -qq install vim
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING JULIA \n*\n*\n'
