@@ -34,7 +34,7 @@ properly.
 ## To Do
 
 - [x] Get `packer build` working with the Ubuntu 12.04 virtualbox machine
-- [ ] Get ligo tools installed
+- [x] Get ligo tools installed
 - [ ] Get this machine up on atlas
 - [ ] Write a demo Vagrantfile with how-to explanations
 - [ ] ???
