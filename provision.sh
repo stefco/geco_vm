@@ -1,3 +1,5 @@
+# By Stefan with much help from Szabi and Petr.
+
 # prevent grub from launching gui on upgrade
 # from: https://github.com/mitchellh/vagrant/issues/289
 # also: http://feeding.cloud.geek.nz/posts/manipulating-debconf-settings-on/
@@ -33,7 +35,8 @@ sync
 # shutdown -h now
 # update
 apt-get -y -qq update
-apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" dist-upgrade
+apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
+                  Dpkg::Options::="--force-confold" dist-upgrade
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING REQUIREMENTS \n*\n*\n'
@@ -57,6 +60,11 @@ apt-get -y -qq install automake
 apt-get -y -qq install libpcre3 libpcre3-dev
 # ALSO need bison for the command yacc
 apt-get -y -qq install bison
+# need this for python requests
+apt-get -y -qq install libffi-dev
+# some matplotlib dependencies
+apt-get -y -qq install libfreetype6-dev
+apt-get -y -qq install libpng-dev libjpeg8-dev
 # lal dependencies
 apt-get -y -qq install pkg-config
 apt-get -y -qq install python-all-dev
@@ -76,15 +84,48 @@ apt-get -y -qq install texlive-latex-extra
 apt-get -y -qq install libhdf5-serial-dev
 
 printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING UTILITIES \n*\n*\n'
+printf '*\n*\n* INSTALLING GLOBUS \n*\n*\n'
+printf '************************************************************************\n'
+wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
+dpkg -i globus-toolkit-repo_latest_all.deb
+apt-get -y -qq update
+apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
+                  Dpkg::Options::="--force-confold" install \
+                  globus-gridftp globus-gram5 globus-gsi \
+                  globus-data-management-server globus-data-management-client \
+                  globus-resource-management-client
+# rm globus-toolkit-repo_latest_all.deb*
+
+printf '************************************************************************\n'
+printf '*\n*\n* INSTALLING DATAGRID \n*\n*\n'
+printf '************************************************************************\n'
+wget -O- http://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash 
+ldg-version
+apt-get -y -qq update
+apt-get -y -qq dist-upgrade
+
+printf '************************************************************************\n'
+printf '*\n*\n* INSTALLING PYTHON UTILITIES \n*\n*\n'
 printf '************************************************************************\n'
 # update pip
 pip install -q --upgrade pip
+# add security stuff for gwpy to prevent InsecurePlatformWarning
+# see: http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent
+pip install requests[security]
 # build and install numpy first
 pip install -q "numpy>=1.9.1"
 # install ipython and jupyter
 pip install -q ipython
 pip install -q jupyter
+
+printf '************************************************************************\n'
+printf '*\n*\n* INSTALLING GWPY \n*\n*\n'
+printf '************************************************************************\n'
+pip install gwpy
+
+printf '************************************************************************\n'
+printf '*\n*\n* INSTALLING LIGO TOOLS \n*\n*\n'
+printf '************************************************************************\n'
 # install lscsoft
 echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft.list
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
@@ -127,10 +168,16 @@ apt-get -y -qq install vim
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING JULIA \n*\n*\n'
 printf '************************************************************************\n'
-# need add-apt-repository: http://lifeonubuntu.com/ubuntu-missing-add-apt-repository-command/
+# need add-apt-repository, install with the below command.
+# see: http://lifeonubuntu.com/ubuntu-missing-add-apt-repository-command/
 apt-get -y -qq install software-properties-common python-software-properties
 add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
 apt-get -y -qq update
 apt-get -y -qq install julia
+# Install iJulia
 julia --eval 'Pkg.add("IJulia")'
+
+printf '************************************************************************\n'
+printf '*\n*\n* DONE PROVISIONING! \n*\n*\n'
+printf '************************************************************************\n'

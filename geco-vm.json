@@ -1,7 +1,7 @@
 {
     "variables": {
-        "ssh_name": "geco",
-        "ssh_pass": "password",
+        "ssh_name": "vagrant",
+        "ssh_pass": "vagrant",
         "hostname": "geco-vm"
     },
     "builders": [
@@ -10,7 +10,7 @@
             "guest_os_type": "Ubuntu_64",
 
             "vboxmanage": [
-                ["modifyvm", "{{.Name}}", "--memory", "1024"],
+                ["modifyvm", "{{.Name}}", "--memory", "512"],
                 ["modifyvm", "{{.Name}}", "--vram", "32"],
                 ["modifyvm", "{{.Name}}", "--cpus", "2"]
             ],
@@ -59,7 +59,8 @@
             "type": "shell",
             "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
             "scripts": [
-                "provision.sh"
+                "provision.sh",
+                "config-vagrant-ssh.sh"
             ]
         }
     ],
