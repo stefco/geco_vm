@@ -57,7 +57,7 @@
             "type": "shell",
             "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
             "scripts": [
-                "provision.sh",
+                "base.sh",
                 "vagrant.sh",
                 "virtualbox.sh",
                 "cleanup.sh",
