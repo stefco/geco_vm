@@ -86,6 +86,9 @@ was invaluable in getting going quickly with Packer. I also found
 [this](http://blog.endpoint.com/2014/03/provisioning-development-environment.html)
 helpful. And, of course, Packer's own documentation is invaluable.
 
+Without [this ssh configuration example](https://github.com/ChiperSoft/Packer-Vagrant-Example/blob/master/packer/scripts/vagrant.sh)
+from @ChiperSoft I would remain locked out of my own box (Thanks!).
+
 As far as provisioning LIGO tools, I drew inspiration from
 [DASWG](https://www.vagrantup.com/downloads.html)'s page, from scripts written
 by Szabi for provisioning his own Debian box, from conversations with people at
