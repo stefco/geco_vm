@@ -1,5 +1,7 @@
 {
     "variables": {
+        "scripts":  "ubuntu_64",
+        "home_dir": "home-directory",
         "ssh_name": "vagrant",
         "ssh_pass": "vagrant",
         "hostname": "geco-vm"
@@ -8,6 +10,7 @@
         {
             "type": "virtualbox-iso",
             "guest_os_type": "Ubuntu_64",
+            "headless": false,
 
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "512"],
@@ -21,7 +24,7 @@
             "iso_checksum": "769474248a3897f4865817446f9a4a53",
             "iso_checksum_type": "md5",
 
-            "http_directory" : "ubuntu_64",
+            "http_directory" : "{{user `scripts`}}",
             "http_port_min" : 9001,
             "http_port_max" : 9001,
 
@@ -62,6 +65,22 @@
                 "provision.sh",
                 "config-vagrant-ssh.sh"
             ]
+        },
+        {
+            "type": "shell",
+            "inline": [
+                "mkdir -p /home/{{user `ssh_name`}}/packer-setup-scripts"
+            ]
+        },
+        {
+            "type": "file",
+            "source": "{{user `home_dir`}}/",
+            "destination": "/home/{{user `ssh_name`}}/"
+        },
+        {
+            "type": "file",
+            "source": "{{user `scripts`}}",
+            "destination": "/home/{{user `ssh_name`}}/packer-setup-scripts"
         }
     ],
     "post-processors": [
