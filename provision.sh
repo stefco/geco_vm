@@ -37,6 +37,12 @@ sync
 apt-get -y -qq update
 apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
                   Dpkg::Options::="--force-confold" dist-upgrade
+apt-get -y install linux-headers-$(uname -r)
+
+# passwordless sudo (necessary for vagrant, you can turn it off yourself later)
+sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=sudo' /etc/sudoers
+sed -i -e 's/%sudo  ALL=(ALL:ALL) ALL/%sudo  ALL=NOPASSWD:ALL/g' /etc/sudoers
+echo "UseDNS no" >> /etc/ssh/sshd_config
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING REQUIREMENTS \n*\n*\n'

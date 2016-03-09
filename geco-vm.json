@@ -60,10 +60,13 @@
     "provisioners": [
         {
             "type": "shell",
-            "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+            "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
             "scripts": [
                 "provision.sh",
-                "config-vagrant-ssh.sh"
+                "vagrant.sh",
+                "virtualbox.sh",
+                "cleanup.sh",
+                "zerodisk.sh"
             ]
         },
         {
