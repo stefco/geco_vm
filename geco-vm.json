@@ -10,7 +10,6 @@
         {
             "type": "virtualbox-iso",
             "guest_os_type": "Ubuntu_64",
-            "headless": false,
 
             "vboxmanage": [
                 ["modifyvm", "{{.Name}}", "--memory", "512"],
