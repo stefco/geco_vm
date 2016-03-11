@@ -121,7 +121,9 @@ pip install requests[security]
 # build and install numpy first
 pip install -q "numpy>=1.9.1"
 # install ipython and jupyter
-pip install -q ipython
+# pip install -q ipython
+# but do it using apt-get instead
+apt-get install ipython
 pip install -q jupyter
 
 printf '************************************************************************\n'
@@ -170,19 +172,24 @@ printf '************************************************************************
 apt-get -y -qq install curl
 apt-get -y -qq install wget
 apt-get -y -qq install vim
+apt-get -y -qq install ncdu
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING JULIA \n*\n*\n'
 printf '************************************************************************\n'
 # need add-apt-repository, install with the below command.
 # see: http://lifeonubuntu.com/ubuntu-missing-add-apt-repository-command/
+# In fact, just don't install Julia just yet (until permissions are figured
+# out
 apt-get -y -qq install software-properties-common python-software-properties
 add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
-apt-get -y -qq update
-apt-get -y -qq install julia
+# apt-get -y -qq update
+# apt-get -y -qq install julia
 # Install iJulia
-julia --eval 'Pkg.add("IJulia")'
+# DON'T INSTALL IJULIA YET; IT IS A SPACE HOG. AND THIS LEADS TO PERMISSIONS
+# PROBLEMS
+# julia --eval 'Pkg.add("IJulia")'
 
 printf '************************************************************************\n'
 printf '*\n*\n* DONE PROVISIONING! \n*\n*\n'
