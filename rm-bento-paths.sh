@@ -14,4 +14,5 @@ http
 floppy
 scripts/common
 scripts/ubuntu
+.bento-version
 __FILE_LIST__

@@ -19,10 +19,12 @@ path_to_bento="$1"
 mkdir -p floppy scripts/common scripts/ubuntu http
 
 while read line; do
-    cp -v -R "$path_to_bento/$line" "./$line"
+    if ! [ -e "./$line" ]; then
+        cp -n -v -R "$path_to_bento/$line" "./$line"
+    fi
 done <<__FILE_LIST__
 ubuntu-12.04-amd64.json
-http
+http/ubuntu-12.04
 floppy/dummy_metadata.json
 scripts/common/metadata.sh
 scripts/ubuntu/update.sh
@@ -34,6 +36,10 @@ scripts/common/vmtools.sh
 scripts/ubuntu/cleanup.sh
 scripts/common/minimize.sh
 __FILE_LIST__
+
+rm .bento-version
+echo `cd "$path_to_bento" && git rev-parse HEAD` \
+     > .bento-version
 
 printf "\nThings you still have to do:\n\n"
 
