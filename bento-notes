@@ -1,0 +1,4 @@
+edit memory to 1024
+and cpus to 2
+then add in provisioning script
+do not use the cleanup script, since dev libs can be good
