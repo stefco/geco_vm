@@ -155,11 +155,30 @@
     },
     {
       "type": "atlas",
-      "only": ["virtualbox-iso", "vmware-iso"],
+      "only": ["virtualbox-iso"],
       "artifact": "stefco/geco-vm",
       "artifact_type": "vagrant.box",
       "metadata": {
         "provider": "virtualbox",
+        "created_at": "{{timestamp}}"
+      }
+    },
+    {
+      "type": "atlas",
+      "only": ["vmware-iso"],
+      "artifact": "stefco/geco-vm",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "vmware_desktop",
+        "created_at": "{{timestamp}}"
+      }
+    },
+    {
+      "type": "atlas",
+      "only": ["qemu"],
+      "artifact": "stefco/geco-vm",
+      "artifact_type": "qemu.image",
+      "metadata": {
         "created_at": "{{timestamp}}"
       }
     }]
