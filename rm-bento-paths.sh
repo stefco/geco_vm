@@ -10,7 +10,7 @@ while read line; do
     rm -v -r -f "$line"
 done <<__FILE_LIST__
 ubuntu-12.04-amd64.json
-http
+http/ubuntu-12.04
 floppy
 scripts/common
 scripts/ubuntu

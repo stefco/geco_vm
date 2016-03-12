@@ -41,8 +41,14 @@ rm .bento-version
 echo `cd "$path_to_bento" && git rev-parse HEAD` \
      > .bento-version
 
-printf "\nThings you still have to do:\n\n"
+cat <<__BENTO_NOTES__
 
-cat bento-notes
+Things you still have to do:
 
-echo
+edit memory to 1024
+and cpus to 2 (except for vmware, since this will cause it to bug)
+then add in provisioning script
+do not use the cleanup script, since dev libs can be good
+remove parallels-iso, which can only be built on darwin
+
+__BENTO_NOTES__
