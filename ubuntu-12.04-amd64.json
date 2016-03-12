@@ -179,6 +179,7 @@
       "artifact": "stefco/geco-vm",
       "artifact_type": "qemu.image",
       "metadata": {
+        "provider": "libvirt",
         "created_at": "{{timestamp}}"
       }
     }]
