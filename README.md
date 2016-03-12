@@ -19,16 +19,20 @@ to get started. These instructions should work on any system.
 
  1. Download and install the latest version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
  2. Download and install the latest version of [Vagrant](https://www.vagrantup.com/downloads.html)
- 3. Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile) to the
+ 3. Run `vagrant init stefco/geco-vm` to get started.
+
+## Optional Extra Configuration
+
+  - Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile) to the
     folder you want to work in. There are some instructions within the
     Vagrantfile on how to customize it to suit your needs; feel free to make
     what changes you need before proceeding.
- 4. Change to that folder and run `vagrant up` in your favorite shell; this will
+  - Change to that folder and run `vagrant up` in your favorite shell; this will
     download the `geco-vm` virtual machine and get it up and running. The
     virtual machine should open in a fresh GUI window _(though you can change
     this setting and run headless, in which case `vagrant ssh` from the command
     line will get you into the machine under the default username "vagrant")_.
- 5. At any time, you can simply run `vagrant` to get a short list of available
+  - At any time, you can simply run `vagrant` to get a short list of available
     commands.
 
 You can read Vagrant's documentation on their
