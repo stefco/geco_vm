@@ -155,7 +155,7 @@
     },
     {
       "type": "atlas",
-      "only": ["virtualbox-iso", "vmware-iso", "parallels-iso"],
+      "only": ["virtualbox-iso", "vmware-iso"],
       "artifact": "stefco/geco-vm",
       "artifact_type": "vagrant.box",
       "metadata": {
