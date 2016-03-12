@@ -102,9 +102,9 @@
       "type": "vmware-iso",
       "vm_name": "{{ user `template` }}",
       "vmx_data": {
-        "cpuid.coresPerSocket": "2",
+        "cpuid.coresPerSocket": "1",
         "memsize": "1024",
-        "numvcpus": "2"
+        "numvcpus": "1"
       }
     },
     {

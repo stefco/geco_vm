@@ -1,6 +1,6 @@
 {
     "variables": {
-        "scripts":  "ubuntu_64",
+        "scripts":  "http",
         "home_dir": "home-directory",
         "ssh_name": "vagrant",
         "ssh_pass": "vagrant",

@@ -46,7 +46,7 @@ cat <<__BENTO_NOTES__
 Things you still have to do:
 
 edit memory to 1024
-and cpus to 2
+and cpus to 2 (except for vmware, since this will cause it to bug)
 then add in provisioning script
 do not use the cleanup script, since dev libs can be good
 remove parallels-iso, which can only be built on darwin
