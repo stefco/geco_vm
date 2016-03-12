@@ -29,6 +29,7 @@
 
             "ssh_username": "{{user `ssh_name`}}",
             "ssh_password": "{{user `ssh_pass`}}",
+            "ssh_port": 22,
             "ssh_wait_timeout": "40m",
 
             "shutdown_command": "echo {{user `ssh_pass`}} | sudo -S shutdown -P now",
@@ -47,11 +48,6 @@
                 "keyboard-configuration/modelcode=SKIP keyboard-configuration/layout=USA ",
                 "keyboard-configuration/variant=USA console-setup/ask_detect=false ",
 
-                "passwd/user-fullname={{user `ssh_name`}} ",
-                "passwd/user-password-again={{user `ssh_pass`}} ",
-                "passwd/user-password={{user `ssh_pass`}} ",
-                "passwd/username={{user `ssh_name`}} ",
-
                 "initrd=/install/initrd.gz -- <enter>"
             ]
         }
@@ -59,10 +55,13 @@
     "provisioners": [
         {
             "type": "shell",
-            "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S bash '{{.Path}}'",
+            "execute_command": "echo '{{user `ssh_pass`}}' | {{.Vars}} sudo -E -S sh '{{.Path}}'",
             "scripts": [
-                "provision.sh",
-                "config-vagrant-ssh.sh"
+                "base.sh",
+                "vagrant.sh",
+                "virtualbox.sh",
+                "cleanup.sh",
+                "zerodisk.sh"
             ]
         },
         {
