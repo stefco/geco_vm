@@ -123,7 +123,7 @@ pip install -q --upgrade pip
 # install ipython and jupyter
 # /usr/local/bin/pip install -q ipython
 # but do it using apt-get instead
-apt-get install ipython
+apt-get install -y -qq ipython
 /usr/local/bin/pip install -q jupyter
 
 printf '************************************************************************\n'
