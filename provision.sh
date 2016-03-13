@@ -139,11 +139,11 @@ echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sou
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
 # quietly installing untrusted packages: https://anothersysadmin.wordpress.com/2008/12/30/tip-installing-untrusted-packages-without-confirmation-on-debian/
 aptitude --no-gui -y -q update
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
 
 # THE BELOW SCRIPTS ALLOW BUILDING FROM SOURCE
 # # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
@@ -185,7 +185,7 @@ apt-get -y -qq install software-properties-common python-software-properties
 add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
 # apt-get -y -qq update
-# apt-get -y -qq install julia
+# apt-get -y -qq install julia || true
 # Install iJulia
 # DON'T INSTALL IJULIA YET; IT IS A SPACE HOG. AND THIS LEADS TO PERMISSIONS
 # PROBLEMS
