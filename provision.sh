@@ -138,7 +138,7 @@ printf '************************************************************************
 echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft.list
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
 # quietly installing untrusted packages: https://anothersysadmin.wordpress.com/2008/12/30/tip-installing-untrusted-packages-without-confirmation-on-debian/
-aptitude --no-gui -y -q update
+aptitude --no-gui -y -q update || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all || true
