@@ -50,5 +50,6 @@ and cpus to 2 (except for vmware, since this will cause it to bug)
 then add in provisioning script
 do not use the cleanup script, since dev libs can be good
 remove parallels-iso, which can only be built on darwin
+remove qemu and vmware, just to test
 
 __BENTO_NOTES__
