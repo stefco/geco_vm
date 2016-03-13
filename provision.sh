@@ -117,19 +117,19 @@ printf '************************************************************************
 pip install -q --upgrade pip
 # add security stuff for gwpy to prevent InsecurePlatformWarning
 # see: http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent
-pip install requests[security]
+/usr/local/bin/pip install requests[security]
 # build and install numpy first
-pip install -q "numpy>=1.9.1"
+/usr/local/bin/pip install -q "numpy>=1.9.1"
 # install ipython and jupyter
-# pip install -q ipython
+# /usr/local/bin/pip install -q ipython
 # but do it using apt-get instead
 apt-get install ipython
-pip install -q jupyter
+/usr/local/bin/pip install -q jupyter
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING GWPY \n*\n*\n'
 printf '************************************************************************\n'
-pip install gwpy
+/usr/local/bin/pip install gwpy
 
 printf '************************************************************************\n'
 printf '*\n*\n* INSTALLING LIGO TOOLS \n*\n*\n'
