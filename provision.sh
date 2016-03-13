@@ -117,7 +117,7 @@ printf '************************************************************************
 pip install -q --upgrade pip
 # add security stuff for gwpy to prevent InsecurePlatformWarning
 # see: http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent
-/usr/local/bin/pip install requests[security]
+/usr/local/bin/pip install -q requests[security]
 # build and install numpy first
 /usr/local/bin/pip install -q "numpy>=1.9.1"
 # install ipython and jupyter
