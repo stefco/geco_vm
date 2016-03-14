@@ -19,22 +19,24 @@ to get started. These instructions should work on any system.
 
  1. Download and install the latest version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
  2. Download and install the latest version of [Vagrant](https://www.vagrantup.com/downloads.html)
- 3. Run `vagrant init stefco/geco-vm` to get started.
+ 3. Run `vagrant init stefco/geco-vm` to create a simple Vagrantfile for this
+    box, or [use the default Vagrantfile](#using-the-default-vagrant-file).
+ 4. Run `vagrant up` to download and boot the virtual machine.
+ 5. Run `vagrant ssh` to start using the virtual machine.
 
-## Optional Extra Configuration
+That's it. Once you are `ssh`ed into the guest machine, it is just like using
+`ssh` with any other machine. You can run `exit` to return to the host machine.
+While not using the guest machine, you can simply run `vagrant` to get a short
+list of available commands.
 
-  - Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile) to the
-    folder you want to work in. There are some instructions within the
-    Vagrantfile on how to customize it to suit your needs; feel free to make
-    what changes you need before proceeding.
-  - Change to that folder and run `vagrant up` in your favorite shell; this will
-    download the `geco-vm` virtual machine and get it up and running. The
-    virtual machine should open in a fresh GUI window _(though you can change
-    this setting and run headless, in which case `vagrant ssh` from the command
-    line will get you into the machine under the default username "vagrant")_.
-  - At any time, you can simply run `vagrant` to get a short list of available
-    commands.
+### Using the Default Vagrant File
 
+Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile)
+to the folder you want to work in. There are some instructions within the
+Vagrantfile on how to customize it to suit your needs; feel free to make
+what changes you need before proceeding.
+
+### More information on Vagrant
 You can read Vagrant's documentation on their
 [website](https://www.vagrantup.com) for more information. One of the greatest
 benefits of Vagrant (besides its easy, declarative command-line interface) is

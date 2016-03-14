@@ -6,6 +6,7 @@ HOME_DIR="${HOME_DIR:-/home/vagrant}";
 case "$PACKER_BUILDER_TYPE" in
 
 virtualbox-iso|virtualbox-ovf)
+    apt-get -y install dkms
     mkdir -p /tmp/vbox;
     ver="`cat /home/vagrant/.vbox_version`";
     mount -o loop $HOME_DIR/VBoxGuestAdditions_${ver}.iso /tmp/vbox;
