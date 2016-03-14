@@ -22,9 +22,15 @@ LAL="http://software.ligo.org/lscsoft/source/lalsuite/lal-${LAL_VERSION}.tar.gz"
 LALFRAME="http://software.ligo.org/lscsoft/source/lalsuite/lalframe-${LALFRAME_VERSION}.tar.gz"
 NDS2_CLIENT="http://software.ligo.org/lscsoft/source/nds2-client-${NDS2_CLIENT_VERSION}.tar.gz"
 
-printf '************************************************************************\n'
-printf '*\n*\n* UPDATING \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* UPDATING 
+*
+*
+***********************************************************
+__MSG__
 # necessary on this version of ubuntu due to hash sum difficulties.
 # see: https://github.com/mininet/mininet/issues/438
 # this works, but the following might come in handy
@@ -44,9 +50,15 @@ sed -i -e '/Defaults\s\+env_reset/a Defaults\texempt_group=sudo' /etc/sudoers
 sed -i -e 's/%sudo  ALL=(ALL:ALL) ALL/%sudo  ALL=NOPASSWD:ALL/g' /etc/sudoers
 echo "UseDNS no" >> /etc/ssh/sshd_config
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING REQUIREMENTS \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING REQUIREMENTS 
+*
+*
+***********************************************************
+__MSG__
 # prevent postfix from launching gui on install
 # via: http://serverfault.com/questions/143968/automate-the-installation-of-postfix-on-ubuntu?newreg=537d60dfb3294436bde1409e74336fe1
 # debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
@@ -89,9 +101,15 @@ apt-get -y -qq install python-m2crypto
 apt-get -y -qq install texlive-latex-extra
 apt-get -y -qq install libhdf5-serial-dev
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING GLOBUS \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING GLOBUS 
+*
+*
+***********************************************************
+__MSG__
 wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
 dpkg -i globus-toolkit-repo_latest_all.deb
 apt-get -y -qq update
@@ -102,17 +120,29 @@ apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
                   globus-resource-management-client
 # rm globus-toolkit-repo_latest_all.deb*
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING DATAGRID \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING DATAGRID
+*
+*
+***********************************************************
+__MSG__
 wget -O- http://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash 
 ldg-version
 apt-get -y -qq update
 apt-get -y -qq dist-upgrade
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING PYTHON UTILITIES \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING PYTHON UTILITIES
+*
+*
+***********************************************************
+__MSG__
 # update pip
 pip install -q --upgrade pip
 # add security stuff for gwpy to prevent InsecurePlatformWarning
@@ -126,14 +156,26 @@ pip install -q --upgrade pip
 apt-get install -y -qq ipython
 /usr/local/bin/pip install -q jupyter
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING GWPY \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING GWPY
+*
+*
+***********************************************************
+__MSG__
 /usr/local/bin/pip install gwpy
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING LIGO TOOLS \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING LIGO TOOLS
+*
+*
+***********************************************************
+__MSG__
 # install lscsoft
 echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft.list
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
@@ -145,7 +187,7 @@ aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q insta
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
 
-# THE BELOW SCRIPTS ALLOW BUILDING FROM SOURCE
+# THE BELOW SCRIPTS BUILD FROM SOURCE
 # # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
 # export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
 # build a newer version of swig
@@ -166,21 +208,31 @@ aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q insta
 # # install testing dependencies
 # pip install -q coveralls "pytest>=2.8" unittest2
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING EXTRAS \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING EXTRAS
+*
+*
+***********************************************************
+__MSG__
 apt-get -y -qq install curl
 apt-get -y -qq install wget
 apt-get -y -qq install vim
 apt-get -y -qq install ncdu
 
-printf '************************************************************************\n'
-printf '*\n*\n* INSTALLING JULIA \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING JULIA
+*
+*
+************************************************************
+__MSG__
 # need add-apt-repository, install with the below command.
 # see: http://lifeonubuntu.com/ubuntu-missing-add-apt-repository-command/
-# In fact, just don't install Julia just yet (until permissions are figured
-# out
 apt-get -y -qq install software-properties-common python-software-properties
 add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
@@ -191,6 +243,12 @@ apt-get -y -qq install julia || true
 # PROBLEMS
 julia --eval 'Pkg.add("IJulia")'
 
-printf '************************************************************************\n'
-printf '*\n*\n* DONE PROVISIONING! \n*\n*\n'
-printf '************************************************************************\n'
+cat <<__MSG__
+************************************************************
+*
+*
+* DONE PROVISIONING!
+*
+*
+************************************************************
+__MSG__
