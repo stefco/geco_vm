@@ -239,9 +239,9 @@ add-apt-repository -y ppa:staticfloat/julia-deps
 apt-get -y -qq update || true
 apt-get -y -qq install julia || true
 # Install iJulia
-# DON'T INSTALL IJULIA YET; IT IS A SPACE HOG. AND THIS LEADS TO PERMISSIONS
-# PROBLEMS
 julia --eval 'Pkg.add("IJulia")'
+# since installed w/ sudo, must change permissions back to the default user.
+chown -R vagrant /home/vagrant/.julia
 
 cat <<__MSG__
 ************************************************************
