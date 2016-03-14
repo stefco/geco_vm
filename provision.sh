@@ -184,7 +184,7 @@ printf '************************************************************************
 apt-get -y -qq install software-properties-common python-software-properties
 add-apt-repository -y ppa:staticfloat/juliareleases
 add-apt-repository -y ppa:staticfloat/julia-deps
-apt-get -y -qq update
+apt-get -y -qq update || true
 apt-get -y -qq install julia || true
 # Install iJulia
 # DON'T INSTALL IJULIA YET; IT IS A SPACE HOG. AND THIS LEADS TO PERMISSIONS
