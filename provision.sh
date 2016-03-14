@@ -189,7 +189,7 @@ apt-get -y -qq install julia || true
 # Install iJulia
 # DON'T INSTALL IJULIA YET; IT IS A SPACE HOG. AND THIS LEADS TO PERMISSIONS
 # PROBLEMS
-# julia --eval 'Pkg.add("IJulia")'
+julia --eval 'Pkg.add("IJulia")'
 
 printf '************************************************************************\n'
 printf '*\n*\n* DONE PROVISIONING! \n*\n*\n'
