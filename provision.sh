@@ -241,7 +241,7 @@ apt-get -y -qq install julia || true
 # Install iJulia
 julia --eval 'Pkg.add("IJulia")'
 # since installed w/ sudo, must change permissions back to the default user.
-chown -R vagrant /home/vagrant/.julia
+chown -R vagrant /home/vagrant
 
 cat <<__MSG__
 ************************************************************
