@@ -1,1 +1,0 @@
-http/build-with-autotools.sh
