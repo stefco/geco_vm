@@ -83,7 +83,7 @@
       "type": "file"
     },
     {
-      "destination": "/tmp/build-with-autotools.json",
+      "destination": "/tmp/build-with-autotools.sh",
       "source": "{{user `autotools`}}",
       "type": "file"
     },
