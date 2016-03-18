@@ -180,33 +180,33 @@ __MSG__
 echo 'deb http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft.list
 echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt/sources.list.d/lscsoft-src.list
 # quietly installing untrusted packages: https://anothersysadmin.wordpress.com/2008/12/30/tip-installing-untrusted-packages-without-confirmation-on-debian/
-aptitude --no-gui -y -q update || true
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade || true
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring || true
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all || true
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
-aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
+# aptitude --no-gui -y -q update || true
+# aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade || true
+# aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring || true
+# aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all || true
+# aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
+# aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
 
 # THE BELOW SCRIPTS BUILD FROM SOURCE
-# # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
-# export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
-# build a newer version of swig
-# source /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
-# build FFTW3 (double and float)
-# source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION} ${FFTW} --enable-shared=yes
-# source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION}-float ${FFTW} --enable-shared=yes --enable-float
-# # build frame libraries
-# source /vagrant/provisioning/build-with-autotools.sh ldas-tools-${LDAS_TOOLS_VERSION} ${LDAS_TOOLS}
-# source /vagrant/provisioning/build-with-autotools.sh libframe-${LIBFRAME_VERSION} ${LIBFRAME}
-# # build LAL packages
-# source /vagrant/provisioning/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} --enable-swig-python
-# source /vagrant/provisioning/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
-# # build NDS2 client
-# source /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
-# # install cython to speed up scipy build
-# travis_retry pip install -q --install-option="--no-cython-compile" Cython
-# # install testing dependencies
-# pip install -q coveralls "pytest>=2.8" unittest2
+# set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
+export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
+build a newer version of swig
+source /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
+build FFTW3 (double and float)
+source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION} ${FFTW} --enable-shared=yes
+source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION}-float ${FFTW} --enable-shared=yes --enable-float
+# build frame libraries
+source /vagrant/provisioning/build-with-autotools.sh ldas-tools-${LDAS_TOOLS_VERSION} ${LDAS_TOOLS}
+source /vagrant/provisioning/build-with-autotools.sh libframe-${LIBFRAME_VERSION} ${LIBFRAME}
+# build LAL packages
+source /vagrant/provisioning/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} --enable-swig-python
+source /vagrant/provisioning/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
+# build NDS2 client
+source /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
+# install cython to speed up scipy build
+travis_retry pip install -q --install-option="--no-cython-compile" Cython
+# install testing dependencies
+pip install -q coveralls "pytest>=2.8" unittest2
 
 cat <<__MSG__
 ***********************************************************
