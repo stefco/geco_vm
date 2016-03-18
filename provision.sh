@@ -5,6 +5,18 @@
 # also: http://feeding.cloud.geek.nz/posts/manipulating-debconf-settings-on/
 echo "set grub-pc/install_devices /dev/sda" | debconf-communicate
 
+# move build-with-autotools file around as needed.
+if [ -e /vagrant/build-with-autotools.sh ]; then
+    echo build-with-autotools.sh found in vagrant directory.
+    cp /vagrant/build-with-autotools.sh /home/vagrant/build-with-autotools.sh
+elif [ -e /tmp/build-with-autotools.sh ]; then
+    echo build-with-autotools.sh found in packer directory.
+    cp /tmp/build-with-autotools.sh /home/vagrant/build-with-autotools.sh
+else
+    echo build-with-autotools.sh not found.
+    exit 1
+fi
+
 # environmental variables
 export DEBIAN_FRONTEND=noninteractive
 SWIG_VERSION="3.0.8"
@@ -83,13 +95,13 @@ apt-get -y -qq install libffi-dev
 # some matplotlib dependencies
 apt-get -y -qq install libfreetype6-dev
 apt-get -y -qq install libpng-dev libjpeg8-dev
+# install pip
 # lal dependencies
 apt-get -y -qq install pkg-config
 apt-get -y -qq install python-all-dev
 apt-get -y -qq install zlib1g-dev
 apt-get -y -qq install libgsl0-dev
 apt-get -y -qq install swig
-apt-get -y -qq install python-pip
 apt-get -y -qq install python-numpy
 apt-get -y -qq install python-scipy
 apt-get -y -qq install bc
@@ -171,7 +183,7 @@ cat <<__MSG__
 ***********************************************************
 *
 *
-* INSTALLING LIGO TOOLS
+* INSTALLING LIGO TOOLS FROM SOURCE
 *
 *
 ***********************************************************
@@ -190,9 +202,9 @@ echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt
 # THE BELOW SCRIPTS BUILD FROM SOURCE
 # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
 export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
-build a newer version of swig
+# build a newer version of swig
 source /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
-build FFTW3 (double and float)
+# build FFTW3 (double and float)
 source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION} ${FFTW} --enable-shared=yes
 source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION}-float ${FFTW} --enable-shared=yes --enable-float
 # build frame libraries
@@ -203,10 +215,10 @@ source /vagrant/provisioning/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} -
 source /vagrant/provisioning/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
 # build NDS2 client
 source /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
-# install cython to speed up scipy build
-travis_retry pip install -q --install-option="--no-cython-compile" Cython
-# install testing dependencies
-pip install -q coveralls "pytest>=2.8" unittest2
+# # install cython to speed up scipy build
+# pip install -q --install-option="--no-cython-compile" Cython
+# # install testing dependencies
+# pip install -q coveralls "pytest>=2.8" unittest2
 
 cat <<__MSG__
 ***********************************************************

@@ -83,6 +83,11 @@
       "type": "file"
     },
     {
+      "destination": "/tmp/build-with-autotools.json",
+      "source": "{{user `autotools`}}",
+      "type": "file"
+    },
+    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "http_proxy={{user `http_proxy`}}",
@@ -115,6 +120,7 @@
     "iso_checksum_type": "sha256",
     "iso_name": "ubuntu-12.04.5-server-amd64.iso",
     "metadata": "floppy/dummy_metadata.json",
+    "autotools": "http/build-with-autotools.sh",
     "mirror": "http://releases.ubuntu.com",
     "mirror_directory": "12.04.5",
     "name": "ubuntu-12.04",
