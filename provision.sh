@@ -150,39 +150,6 @@ cat <<__MSG__
 ***********************************************************
 *
 *
-* INSTALLING PYTHON UTILITIES
-*
-*
-***********************************************************
-__MSG__
-# update pip
-pip install -q --upgrade pip
-# add security stuff for gwpy to prevent InsecurePlatformWarning
-# see: http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent
-/usr/local/bin/pip install -q requests[security]
-# build and install numpy first
-/usr/local/bin/pip install -q "numpy>=1.9.1"
-# install ipython and jupyter
-# /usr/local/bin/pip install -q ipython
-# but do it using apt-get instead
-apt-get install -y -qq ipython
-/usr/local/bin/pip install -q jupyter
-
-cat <<__MSG__
-***********************************************************
-*
-*
-* INSTALLING GWPY
-*
-*
-***********************************************************
-__MSG__
-/usr/local/bin/pip install gwpy
-
-cat <<__MSG__
-***********************************************************
-*
-*
 * INSTALLING LIGO TOOLS FROM SOURCE
 *
 *
@@ -219,6 +186,40 @@ source /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_V
 # pip install -q --install-option="--no-cython-compile" Cython
 # # install testing dependencies
 # pip install -q coveralls "pytest>=2.8" unittest2
+
+
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING PYTHON UTILITIES
+*
+*
+***********************************************************
+__MSG__
+# update pip
+pip install -q --upgrade pip
+# add security stuff for gwpy to prevent InsecurePlatformWarning
+# see: http://stackoverflow.com/questions/29134512/insecureplatformwarning-a-true-sslcontext-object-is-not-available-this-prevent
+/usr/local/bin/pip install -q requests[security]
+# build and install numpy first
+/usr/local/bin/pip install -q "numpy>=1.9.1"
+# install ipython and jupyter
+# /usr/local/bin/pip install -q ipython
+# but do it using apt-get instead
+apt-get install -y -qq ipython
+/usr/local/bin/pip install -q jupyter
+
+cat <<__MSG__
+***********************************************************
+*
+*
+* INSTALLING GWPY
+*
+*
+***********************************************************
+__MSG__
+/usr/local/bin/pip install gwpy
 
 cat <<__MSG__
 ***********************************************************
