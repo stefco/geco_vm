@@ -26,6 +26,7 @@ export LALFRAME_VERSION="1.3.0"
 export LIBFRAME_VERSION="8.20"
 export LDAS_TOOLS_VERSION="2.4.1"
 export NDS2_CLIENT_VERSION="0.10.4"
+export GLUE_VERSION='1.49.1'
 export SWIG_="https://github.com/swig/swig/archive/rel-${SWIG_VERSION}.tar.gz"
 export FFTW="http://www.fftw.org/fftw-${FFTW_VERSION}.tar.gz"
 export LDAS_TOOLS="http://software.ligo.org/lscsoft/source/ldas-tools-${LDAS_TOOLS_VERSION}.tar.gz"
@@ -33,6 +34,7 @@ export LIBFRAME="http://software.ligo.org/lscsoft/source/libframe-${LIBFRAME_VER
 export LAL="http://software.ligo.org/lscsoft/source/lalsuite/lal-${LAL_VERSION}.tar.gz"
 export LALFRAME="http://software.ligo.org/lscsoft/source/lalsuite/lalframe-${LALFRAME_VERSION}.tar.gz"
 export NDS2_CLIENT="http://software.ligo.org/lscsoft/source/nds2-client-${NDS2_CLIENT_VERSION}.tar.gz"
+export GLUE="http://software.ligo.org/lscsoft/source/glue-${GLUE_VERSION}.tar.gz"
 
 cat <<__MSG__
 ***********************************************************
@@ -183,6 +185,8 @@ bash /home/vagrant/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} --enable-sw
 bash /home/vagrant/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
 # build NDS2 client
 bash /home/vagrant/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
+# build glue package
+bash /home/vagrant/build-with-autotools.sh glue-${GLUE_VERSION} ${GLUE}
 # # install cython to speed up scipy build
 # pip install -q --install-option="--no-cython-compile" Cython
 # # install testing dependencies
