@@ -96,6 +96,7 @@ apt-get -y -qq install libffi-dev
 apt-get -y -qq install libfreetype6-dev
 apt-get -y -qq install libpng-dev libjpeg8-dev
 # install pip
+apt-get -y -qq install python-pip
 # lal dependencies
 apt-get -y -qq install pkg-config
 apt-get -y -qq install python-all-dev
