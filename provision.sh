@@ -19,20 +19,20 @@ fi
 
 # environmental variables
 export DEBIAN_FRONTEND=noninteractive
-SWIG_VERSION="3.0.8"
-FFTW_VERSION="3.3.4"
-LAL_VERSION="6.15.0"
-LALFRAME_VERSION="1.3.0"
-LIBFRAME_VERSION="8.20"
-LDAS_TOOLS_VERSION="2.4.1"
-NDS2_CLIENT_VERSION="0.10.4"
-SWIG_="https://github.com/swig/swig/archive/rel-${SWIG_VERSION}.tar.gz"
-FFTW="http://www.fftw.org/fftw-${FFTW_VERSION}.tar.gz"
-LDAS_TOOLS="http://software.ligo.org/lscsoft/source/ldas-tools-${LDAS_TOOLS_VERSION}.tar.gz"
-LIBFRAME="http://software.ligo.org/lscsoft/source/libframe-${LIBFRAME_VERSION}.tar.gz"
-LAL="http://software.ligo.org/lscsoft/source/lalsuite/lal-${LAL_VERSION}.tar.gz"
-LALFRAME="http://software.ligo.org/lscsoft/source/lalsuite/lalframe-${LALFRAME_VERSION}.tar.gz"
-NDS2_CLIENT="http://software.ligo.org/lscsoft/source/nds2-client-${NDS2_CLIENT_VERSION}.tar.gz"
+export SWIG_VERSION="3.0.8"
+export FFTW_VERSION="3.3.4"
+export LAL_VERSION="6.15.0"
+export LALFRAME_VERSION="1.3.0"
+export LIBFRAME_VERSION="8.20"
+export LDAS_TOOLS_VERSION="2.4.1"
+export NDS2_CLIENT_VERSION="0.10.4"
+export SWIG_="https://github.com/swig/swig/archive/rel-${SWIG_VERSION}.tar.gz"
+export FFTW="http://www.fftw.org/fftw-${FFTW_VERSION}.tar.gz"
+export LDAS_TOOLS="http://software.ligo.org/lscsoft/source/ldas-tools-${LDAS_TOOLS_VERSION}.tar.gz"
+export LIBFRAME="http://software.ligo.org/lscsoft/source/libframe-${LIBFRAME_VERSION}.tar.gz"
+export LAL="http://software.ligo.org/lscsoft/source/lalsuite/lal-${LAL_VERSION}.tar.gz"
+export LALFRAME="http://software.ligo.org/lscsoft/source/lalsuite/lalframe-${LALFRAME_VERSION}.tar.gz"
+export NDS2_CLIENT="http://software.ligo.org/lscsoft/source/nds2-client-${NDS2_CLIENT_VERSION}.tar.gz"
 
 cat <<__MSG__
 ***********************************************************
@@ -170,23 +170,22 @@ echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt
 # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
 # export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
 # build a newer version of swig
-source /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
+bash /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
 # build FFTW3 (double and float)
-source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION} ${FFTW} --enable-shared=yes
-source /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION}-float ${FFTW} --enable-shared=yes --enable-float
+bash /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION} ${FFTW} --enable-shared=yes
+bash /vagrant/provisioning/build-with-autotools.sh fftw-${FFTW_VERSION}-float ${FFTW} --enable-shared=yes --enable-float
 # build frame libraries
-source /vagrant/provisioning/build-with-autotools.sh ldas-tools-${LDAS_TOOLS_VERSION} ${LDAS_TOOLS}
-source /vagrant/provisioning/build-with-autotools.sh libframe-${LIBFRAME_VERSION} ${LIBFRAME}
+bash /vagrant/provisioning/build-with-autotools.sh ldas-tools-${LDAS_TOOLS_VERSION} ${LDAS_TOOLS}
+bash /vagrant/provisioning/build-with-autotools.sh libframe-${LIBFRAME_VERSION} ${LIBFRAME}
 # build LAL packages
-source /vagrant/provisioning/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} --enable-swig-python
-source /vagrant/provisioning/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
+bash /vagrant/provisioning/build-with-autotools.sh lal-${LAL_VERSION} ${LAL} --enable-swig-python
+bash /vagrant/provisioning/build-with-autotools.sh lalframe-${LALFRAME_VERSION} ${LALFRAME} --enable-swig-python
 # build NDS2 client
-source /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
+bash /vagrant/provisioning/build-with-autotools.sh nds2-client-${NDS2_CLIENT_VERSION} ${NDS2_CLIENT} --disable-swig-java --disable-mex-matlab
 # # install cython to speed up scipy build
 # pip install -q --install-option="--no-cython-compile" Cython
 # # install testing dependencies
 # pip install -q coveralls "pytest>=2.8" unittest2
-
 
 cat <<__MSG__
 ***********************************************************
