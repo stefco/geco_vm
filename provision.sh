@@ -168,7 +168,7 @@ echo 'deb-src http://software.ligo.org/lscsoft/debian wheezy contrib' > /etc/apt
 
 # THE BELOW SCRIPTS BUILD FROM SOURCE
 # set paths for PKG_CONFIG <-- THIS IS PROBABLY UNNECESSARY OFF OF TRAVIS
-export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
+# export PKG_CONFIG_PATH=${PKG_CONFIG_PATH}:${VIRTUAL_ENV}/lib/pkgconfig
 # build a newer version of swig
 source /vagrant/provisioning/build-with-autotools.sh swig-${SWIG_VERSION} ${SWIG_}
 # build FFTW3 (double and float)
