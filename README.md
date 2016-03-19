@@ -103,14 +103,18 @@ are capable of provisioning an Ubuntu 12.04 installation on Travis CI's servers
 sufficiently well for gwpy to install properly (though they use source
 installations, which I avoid for the sake of build speed).
 
+## Notes on LIGO Data Grid
+
+  - **Different data is available at different sites.** See [here](https://www.lsc-group.phys.uwm.edu/lscdatagrid/resources/data/index.html) for a breakdown of what is where.
+
 ## To Do
 
 - [x] Get `packer build` working with the Ubuntu 12.04 virtualbox machine
 - [x] Get ligo tools installed
 - [x] Get this machine up on atlas
 - [x] Write a demo Vagrantfile with how-to explanations
-- [ ] Install Globus/Condor/DataGrid
-- [ ] Install `gwpy`
+- [x] Install Globus/Condor/DataGrid
+- [x] Install `gwpy`
 - [ ] Install `geco_stat`
 - [ ] ???
 - [ ] Profit
