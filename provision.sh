@@ -234,6 +234,8 @@ apt-get -y -qq install curl
 apt-get -y -qq install wget
 apt-get -y -qq install vim
 apt-get -y -qq install ncdu
+apt-get -y -qq install screen
+apt-get -y -qq install tmux
 
 cat <<__MSG__
 ***********************************************************
