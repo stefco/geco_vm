@@ -184,7 +184,10 @@ aptitude --no-gui -y -q update || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q full-upgrade || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-archive-keyring || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-all || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lscsoft-glue || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install python-glue || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
+aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install python-nds2-client || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
 
 # THE BELOW SCRIPTS BUILD FROM SOURCE
