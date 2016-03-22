@@ -129,9 +129,8 @@ cat <<__MSG__
 *
 ***********************************************************
 __MSG__
-# wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
-# dpkg -i globus-toolkit-repo_latest_all.deb
-apt-get -y -qq install globus-toolkit-repo
+wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
+dpkg -i globus-toolkit-repo_latest_all.deb
 apt-get -y -qq update
 apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
                   Dpkg::Options::="--force-confold" install \
@@ -160,7 +159,7 @@ cat <<__MSG__
 ***********************************************************
 *
 *
-* INSTALLING LIGO TOOLS FROM SOURCE
+* INSTALLING LIGO TOOLS
 *
 *
 ***********************************************************
