@@ -104,6 +104,8 @@
         "scripts/ubuntu/sudoers.sh",
         "scripts/ubuntu/vagrant.sh",
         "scripts/common/vmtools.sh",
+        "scripts/ubuntu/cleanup.sh",
+        "check-installed.sh",
         "scripts/common/minimize.sh"
       ],
       "type": "shell"
