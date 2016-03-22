@@ -129,15 +129,17 @@ cat <<__MSG__
 *
 ***********************************************************
 __MSG__
-wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
-dpkg -i globus-toolkit-repo_latest_all.deb
+# wget http://www.globus.org/ftppub/gt6/installers/repo/globus-toolkit-repo_latest_all.deb
+# dpkg -i globus-toolkit-repo_latest_all.deb
+apt-get -y -qq install globus-toolkit-repo
 apt-get -y -qq update
 apt-get -y -qq -o Dpkg::Options::="--force-confdef" -o \
                   Dpkg::Options::="--force-confold" install \
                   globus-gridftp globus-gram5 globus-gsi \
                   globus-data-management-server globus-data-management-client \
                   globus-resource-management-client
-# rm globus-toolkit-repo_latest_all.deb*
+apt-get -y -qq install vdt-gsi-openssh-client
+rm globus-toolkit-repo_latest_all.deb*
 
 cat <<__MSG__
 ***********************************************************
@@ -150,6 +152,7 @@ cat <<__MSG__
 __MSG__
 wget -O- http://www.lsc-group.phys.uwm.edu/lscdatagrid/doc/ldg-client.sh | bash 
 ldg-version
+apt-get -y -qq install ligo-proxy-utils
 apt-get -y -qq update
 apt-get -y -qq dist-upgrade
 
