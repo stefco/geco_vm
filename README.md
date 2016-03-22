@@ -19,8 +19,10 @@ to get started. These instructions should work on any system.
 
  1. Download and install the latest version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
  2. Download and install the latest version of [Vagrant](https://www.vagrantup.com/downloads.html)
- 3. Run `vagrant init stefco/geco-vm` to create a simple Vagrantfile for this
-    box, or [use the default Vagrantfile](#using-the-default-vagrant-file).
+ 3. Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile)
+    to the folder you want to work in, or
+    [create a default Vagrantfile](#using-the-default-vagrant-file)
+    if you'd like a fresh start.
  4. Run `vagrant up` to download and boot the virtual machine.
  5. Run `vagrant ssh` to start using the virtual machine.
 
@@ -29,12 +31,86 @@ That's it. Once you are `ssh`ed into the guest machine, it is just like using
 While not using the guest machine, you can simply run `vagrant` to get a short
 list of available commands.
 
-### Using the Default Vagrant File
+### Using a Default Vagrant File
 
-Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile)
-to the folder you want to work in. There are some instructions within the
-Vagrantfile on how to customize it to suit your needs; feel free to make
-what changes you need before proceeding.
+If you want to start with Vagrant's default "blank" Vagrantfile, you can
+generate one by running `vagrant init stefco/geco-vm`. This creates a 
+simple Vagrantfile for this box, with some helpful comments on how you can
+modify the file to your liking. There are a couple of features of the
+`geco_vm` box that are specified in the repository Vagrantfile above, so you
+should probably just go ahead and use that one.
+
+### Vagrant Best Practices
+
+You should think of your virtual machine as disposable; ideally, you should
+not store any information on it long term. Because Vagrant 
+[automatically shares](https://www.vagrantup.com/docs/getting-started/synced_folders.html)
+your host computer's vagrant folder (i.e. the folder in which your Vagrantfile
+is located) with the guest virtual machine under the `/vagrant` directory, it
+is trivially easy to keep your work saved on your host machine by keeping it
+in the `/vagrant` directory of the guest machine. This way, if you have to
+delete your virtual machine (for example, if you are upgrading to the latest
+version), you can do so without having to worry about lost work.
+
+### Updating to the Latest Version of the VM
+
+#### TL;DR:
+
+```bash
+vagrant destroy -f
+vagrant box remove -f stefco/geco-vm
+vagrant up
+```
+
+#### Full Instructions, With Explanation
+
+It is easy to make mistakes while upgrading to the latest version of
+vagrant if you don't know what you're doing. This can cause you to waste
+hours troubleshooting a broken feature that has been fixed on the latest
+version of the box simply because you think you've already upgraded (when
+in fact you haven't). Knowing how vagrant works
+can help immensely in avoiding this peculiar debugging hell.
+
+When you initialize your virtual machine with `vagrant up`, vagrant does the
+following:
+
+ 1. Checks whether you already have a copy of `stefco/geco-vm` saved in vagrant's
+    cache of vagrant boxes
+ 2. Downloads the latest copy of `stefco/geco-vm` if you do not have a local
+    copy; if you **do** have a local copy, **even if it is outdated**, vagrant
+    will use that one
+ 3. Decompresses and copies your local copy of the `stefco/geco-vm` box and
+    stores that fresh copy of the virtual machine in the `~/Virtualbox\ VMs`
+    directory; this copy will be the virtual machine you use
+ 4. Starts up the new machine
+ 5. Runs any provisioning scripts that you specify
+    (which allow you to further customize the box before you use it)
+ 6. Mounts shared folders
+
+Note the following:
+
+  - Simply updating your cached vagrant box to the latest version with
+    `vagrant box update` will only update your cached box; **this alone will
+    not have any effect on the virtual machine you are already using.**
+  - Destroying and recreating your machine using `vagrant destroy -f`
+    followed by `vagrant up` will just create a fresh version of the old
+    box; you need to make sure you also update the cached
+    copy of the vagrant box using `vagrant box update` before you
+    reinitialize the virtual machine.
+
+So, to make sure you are using the latest and greatest version of `stefco/geco-vm`,
+you should make sure you are in your vagrant working directory on your host
+machine and run:
+
+```bash
+vagrant destroy -f
+vagrant box remove -f stefco/geco-vm
+vagrant up
+```
+
+You can check on your cached version of this (and all) vagrant boxes by running
+`vagrant box list`, and you can see whether you successfully deleted your
+running copy of the virtual machine by running `vagrant status`.
 
 ### More information on Vagrant
 You can read Vagrant's documentation on their
