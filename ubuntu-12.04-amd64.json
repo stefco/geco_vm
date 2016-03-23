@@ -83,7 +83,7 @@
       "type": "file"
     },
     {
-      "destination": "/opt/epics",
+      "destination": "/tmp/epics",
       "source": "{{user `epics`}}/distfiles",
       "type": "file"
     },
@@ -113,6 +113,7 @@
       "scripts": [
         "scripts/common/metadata.sh",
         "scripts/ubuntu/update.sh",
+        "scripts/geco/move-files.sh",
         "scripts/geco/provision.sh",
         "scripts/geco/install-medm.sh",
         "scripts/common/sshd.sh",
