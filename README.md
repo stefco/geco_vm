@@ -155,14 +155,17 @@ uses a template file (in our case, `geco-vm.json`) to specify:
 
 After installing the latest version of `packer`, there is one step you will
 have to take before you can build the machine for yourself. Because Atlas
-requires authentication to deploy a newly build vagrant box, you must either
-remove the final deployment step from the `ubuntu-12.04-amd64.json` template
-file, or create your own free Atlas account at atlas.hashicorp.com, create a
-new Packer project, and modify the template file to point to your now project.
+requires authentication to deploy a newly build vagrant box, you must either:
 
- 1. To remove the deployment step from the template file, delete _precisely_
-    these lines:
-    ```
+ 1. Remove the final deployment step from the `ubuntu-12.04-amd64.json` template
+    file, or
+ 2. Create your own free Atlas account at atlas.hashicorp.com, create a
+    new Packer project, and modify the template file to point to your now project.
+
+**To remove the deployment step** from the template file, delete _precisely_
+these lines:
+
+```
     },
     {
       "type": "atlas",
@@ -173,16 +176,20 @@ new Packer project, and modify the template file to point to your now project.
         "provider": "virtualbox",
         "created_at": "{{timestamp}}"
       }
-    ```
- 2. To point to your newly created packer project modify just the "artifact"
-    line in the above code section, changing it from:
-    ```
-      "artifact": "stefco/geco-vm",
-    ```
-    to:
-    ```
-      "artifact": "your_atlas_username/your_packer_project_name",
-    ```
+```
+
+**To point to your newly created packer project**, modify _only_ the
+"artifact" line in the above code section, changing it from:
+
+```
+"artifact": "stefco/geco-vm",
+```
+
+to:
+
+```
+"artifact": "your_atlas_username/your_packer_project_name",
+```
 
 Now that that is finished, you can start running with
 
@@ -191,7 +198,9 @@ packer build ubuntu-12.04-amd64.json
 ```
 
 and, after a considerable amount of time, you should have a fresh copy of
-the vm ready to play with. Of course, you can modify it as you like, and
+the vm ready to play with.
+
+Of course, you can modify it as you like, and
 if you add features that will be useful to others, I will happily incorporate
 those changes into the base box.
 
