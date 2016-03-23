@@ -1,5 +1,17 @@
 # GECo Virtual Machine
 
+## Contents
+
+  - [Introduction](#introduction)
+  - [Using the Virtual Machine](#using-the-virtual-machine)
+      - [Installing and Getting Started](#installing-and-getting-started)
+      - [Updating to the Latest Version of the VM](#updating-to-the-latest-version-of-the-vm)
+  - [Pro Tips](#pro-tips)
+  - [Developing the Base Image](#developing-the-base-image)
+  - [Acknowledgements](#acknowledgements)
+  - [More information on Vagrant](#more-information-on-vagrant)
+  - [To Do](#to-do)
+
 ## Introduction
 
 This is a virtual machine with all important LIGO-related software
@@ -95,7 +107,7 @@ running copy of the virtual machine by running `vagrant status`.
 
 ## Pro-Tips
 
-### Vagrant Best Practices
+#### Vagrant Best Practices
 
 You should think of your virtual machine as disposable; ideally, you should
 not store any information on it long term. Because Vagrant 
@@ -107,7 +119,7 @@ in the `/vagrant` directory of the guest machine. This way, if you have to
 delete your virtual machine (for example, if you are upgrading to the latest
 version), you can do so without having to worry about lost work.
 
-### Adding Custom Scripts
+#### Adding Custom Scripts
 
 You can add custom scripts to your path by putting them in the `/home/vagrant`
 directory on the host machine. You can also add those scripts to a `bin`
@@ -115,7 +127,7 @@ folder in the directory on your host machine where the `Vagrantfile` is
 located (since this directory is shared with `geco-vm` through the
 `/vagrant` directory).
 
-### Previewing Images with iTerm2
+#### Previewing Images with iTerm2
 
 If you are using a mac with the latest build of iTerm2, you can use `imgcat`
 to preview images on your virtual machine _right in your terminal_ during an
@@ -198,13 +210,7 @@ are capable of provisioning an Ubuntu 12.04 installation on Travis CI's servers
 sufficiently well for gwpy to install properly (though they use source
 installations, which I avoid for the sake of build speed).
 
-## Notes on LIGO Data Grid
-
-  - **Different data is available at different sites.** See
-    [here](https://www.lsc-group.phys.uwm.edu/lscdatagrid/resources/data/index.html)
-    for a (very out-of-date) breakdown of what is where.
-
-### More information on Vagrant
+## More information on Vagrant
 
 #### Creating a Default Vagrant File
 
