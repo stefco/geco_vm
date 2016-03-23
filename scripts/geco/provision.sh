@@ -263,6 +263,8 @@ if [ -e /tmp/bin ]; then
         mkdir "$HOME"/bin
     fi
     mv --no-clobber /tmp/bin/* "$HOME"/bin
+    chmod +x -R "$HOME"/bin
+    chmod +x -R /vagrant/bin
     echo export PATH=\"/vagrant:$HOME/bin:\$PATH\" >> ~/.bashrc
 fi
 
