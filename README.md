@@ -129,8 +129,10 @@ located (since this directory is shared with `geco-vm` through the
 
 #### Previewing Images with iTerm2
 
-If you are using a mac with the latest build of iTerm2, you can use `imgcat`
-to preview images on your virtual machine _right in your terminal_ during an
+If you are using a mac with the latest build of
+[iTerm2](http://iterm2.com/downloads.html) (something I highly recommend, since
+iTerm2 is an excellent terminal emulator), you can use `imgcat` to preview
+images on your virtual machine _right in your terminal_ during an
 ssh session. This is nice for e.g. taking a quick look at a fresh plot
 without leaving the command line.
 
