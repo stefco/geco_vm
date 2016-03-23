@@ -274,7 +274,6 @@ apt-get -y -qq update || true
 apt-get -y -qq install julia || true
 # Install iJulia
 julia --eval 'Pkg.add("IJulia")'
-julia --eval 'Pkg.add("PyPlot")'
 # since installed w/ sudo, must change permissions back to the default user.
 chown -R vagrant $HOME
 
