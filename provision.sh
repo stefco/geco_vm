@@ -255,6 +255,16 @@ apt-get -y -qq install vim
 apt-get -y -qq install ncdu
 apt-get -y -qq install screen
 apt-get -y -qq install tmux
+if [ -e /tmp/.bashrc ]; then
+    cat /tmp/.bashrc >> "$HOME"/.bashrc
+fi
+if [ -e /tmp/bin ]; then
+    if ! [ -e "$HOME"/bin ]; then
+        mkdir "$HOME"/bin
+    fi
+    mv --no-clobber /tmp/bin/* "$HOME"/bin
+    echo export PATH=\"$HOME/bin:\$PATH\" >> ~/.bashrc
+fi
 
 cat <<__MSG__
 ***********************************************************

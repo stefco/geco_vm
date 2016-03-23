@@ -88,6 +88,16 @@
       "type": "file"
     },
     {
+      "destination": "/tmp/.bashrc",
+      "source": "{{user `home-directory`}}",
+      "type": "file"
+    },
+    {
+      "destination": "/tmp/bin",
+      "source": "{{user `home-directory`}}/bin",
+      "type": "file"
+    },
+    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "http_proxy={{user `http_proxy`}}",
