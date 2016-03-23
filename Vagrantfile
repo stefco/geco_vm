@@ -14,8 +14,11 @@ Vagrant.configure(2) do |config|
 
   ## If you want to run x11 applications in geco-vm and access them without the
   ## virtualbox gui, you can UNCOMMENT these two lines to enable x11 forwarding.
-  # config.ssh.forward_agent = true
-  # config.ssh.forward_x11 = true
+  config.ssh.forward_agent = true
+  config.ssh.forward_x11 = true
+
+  ## UNCOMMENT the below line for MEDM/EPICS over port 16253
+  config.vm.network "forwarded_port", guest: 16253, host: 16253
 
   ## UNCOMMENT the below line to forward port 8888 from geco-vm to your host
   ## computer. This lets you run Jupyter (aka iPython notebooks) on geco-vm and
