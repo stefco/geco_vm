@@ -57,10 +57,11 @@ cat <<__MSG__
 ***********************************************************
 __MSG__
 # Delete development packages
+# do not remove julia dev packages; they are required
 dpkg --list \
     | awk '{ print $2 }' \
     | grep -- '-dev$' \
-    | sed '/julia/d' \ # do not remove julia dev packages; they are required
+    | sed '/julia/d' \
     | xargs apt-get -y purge;
 
 cat <<__MSG__
