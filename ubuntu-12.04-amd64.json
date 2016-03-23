@@ -89,7 +89,7 @@
     },
     {
       "destination": "/tmp/.bashrc",
-      "source": "{{user `home-directory`}}",
+      "source": "{{user `home-directory`}}/.bashrc",
       "type": "file"
     },
     {
