@@ -199,6 +199,8 @@ aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q insta
 # # # install testing dependencies
 # # pip install -q coveralls "pytest>=2.8" unittest2
 
+# clean up a bit
+rm -v $HOME/build-with-autotools.sh
 cat <<__MSG__
 ***********************************************************
 *
