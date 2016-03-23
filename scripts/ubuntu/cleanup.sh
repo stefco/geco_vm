@@ -64,17 +64,17 @@ dpkg --list \
     | sed '/julia/d' \
     | xargs apt-get -y purge;
 
-cat <<__MSG__
-***********************************************************
-*
-*
-* DELETE X11 LIBRARIES
-*
-*
-***********************************************************
-__MSG__
-# Delete X11 libraries
-apt-get -y purge libx11-data xauth libxmuu1 libxcb1 libx11-6 libxext6;
+# cat <<__MSG__
+# ***********************************************************
+# *
+# *
+# * DELETE X11 LIBRARIES
+# *
+# *
+# ***********************************************************
+# __MSG__
+# # Delete X11 libraries
+# apt-get -y purge libx11-data xauth libxmuu1 libxcb1 libx11-6 libxext6;
 
 cat <<__MSG__
 ***********************************************************
