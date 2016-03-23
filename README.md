@@ -216,10 +216,9 @@ helpful. And, of course, Packer's own documentation is invaluable.
 As far as provisioning LIGO tools, I drew inspiration from
 [DASWG](https://www.vagrantup.com/downloads.html)'s page, from scripts written
 by Szabi for provisioning his own Debian box, from conversations with people at
-the observatories, and from the gwpy .travis.yml configuration scripts, which
-are capable of provisioning an Ubuntu 12.04 installation on Travis CI's servers
-sufficiently well for gwpy to install properly (though they use source
-installations, which I avoid for the sake of build speed).
+the observatories, and from the gwpy .travis.yml configuration scripts. There
+are also plenty of good [instructions](https://wiki.ligo.org/RemoteAccess/WebHome)
+on various remote access topics on the LIGO wiki.
 
 ## More information on Vagrant
 
