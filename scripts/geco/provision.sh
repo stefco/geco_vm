@@ -255,6 +255,8 @@ apt-get -y -qq install vim
 apt-get -y -qq install ncdu
 apt-get -y -qq install screen
 apt-get -y -qq install tmux
+apt-get -y -qq install tree
+apt-get -y -qq install ranger
 if [ -e /tmp/.bashrc ]; then
     cat /tmp/.bashrc >> "$HOME"/.bashrc
 fi
@@ -264,7 +266,6 @@ if [ -e /tmp/bin ]; then
     fi
     mv --no-clobber /tmp/bin/* "$HOME"/bin
     chmod +x -R "$HOME"/bin
-    chmod +x -R /vagrant/bin
     echo export PATH=\"/vagrant:$HOME/bin:\$PATH\" >> ~/.bashrc
 fi
 
