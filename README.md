@@ -14,6 +14,8 @@ might find this useful.
 
 ## Using the Virtual Machine
 
+### Installing and Getting Started
+
 If you just want to _use_ the virtual machine, you can follow these instructions
 to get started. These instructions should work on any system.
 
@@ -21,7 +23,7 @@ to get started. These instructions should work on any system.
  2. Download and install the latest version of [Vagrant](https://www.vagrantup.com/downloads.html)
  3. Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile)
     to the folder you want to work in, or
-    [create a default Vagrantfile](#using-the-default-vagrant-file)
+    [create a default Vagrantfile](#creating-a-default-vagrant-file)
     if you'd like a fresh start.
  4. Run `vagrant up` to download and boot the virtual machine.
  5. Run `vagrant ssh` to start using the virtual machine.
@@ -30,27 +32,6 @@ That's it. Once you are `ssh`ed into the guest machine, it is just like using
 `ssh` with any other machine. You can run `exit` to return to the host machine.
 While not using the guest machine, you can simply run `vagrant` to get a short
 list of available commands.
-
-### Using a Default Vagrant File
-
-If you want to start with Vagrant's default "blank" Vagrantfile, you can
-generate one by running `vagrant init stefco/geco-vm`. This creates a 
-simple Vagrantfile for this box, with some helpful comments on how you can
-modify the file to your liking. There are a couple of features of the
-`geco_vm` box that are specified in the repository Vagrantfile above, so you
-should probably just go ahead and use that one.
-
-### Vagrant Best Practices
-
-You should think of your virtual machine as disposable; ideally, you should
-not store any information on it long term. Because Vagrant 
-[automatically shares](https://www.vagrantup.com/docs/getting-started/synced_folders.html)
-your host computer's vagrant folder (i.e. the folder in which your Vagrantfile
-is located) with the guest virtual machine under the `/vagrant` directory, it
-is trivially easy to keep your work saved on your host machine by keeping it
-in the `/vagrant` directory of the guest machine. This way, if you have to
-delete your virtual machine (for example, if you are upgrading to the latest
-version), you can do so without having to worry about lost work.
 
 ### Updating to the Latest Version of the VM
 
@@ -112,32 +93,36 @@ You can check on your cached version of this (and all) vagrant boxes by running
 `vagrant box list`, and you can see whether you successfully deleted your
 running copy of the virtual machine by running `vagrant status`.
 
-### More information on Vagrant
-You can read Vagrant's documentation on their
-[website](https://www.vagrantup.com) for more information. One of the greatest
-benefits of Vagrant (besides its easy, declarative command-line interface) is
-that it automatically shares certain files on your host machine with the guest
-virtual machine. More specifically, it shares files that are in the same folder
-as your Vagrantfile, and it puts these files in the `/vagrant` directory on the
-virtual machine.
+## Pro-Tips
 
-This makes it trivially easy to work on both machines at once, either through
-the command line or through the gui (as long as you've placed your Vagrantfile
-in the directory where you are planning on working). This is especially nice in
-a headless environment; your `vagrant ssh` session will behave as if the host
-and guest OSes are sharing their filesystem. This is nice if, like most people,
-you are not interested in spending time transfering files and syncing
-environments.
+### Vagrant Best Practices
 
-There are many other interesting and useful features of Vagrant that make it
-a wonderful tool for streamlining your workflow; again, check out their website
-for more information.
+You should think of your virtual machine as disposable; ideally, you should
+not store any information on it long term. Because Vagrant 
+[automatically shares](https://www.vagrantup.com/docs/getting-started/synced_folders.html)
+your host computer's vagrant folder (i.e. the folder in which your Vagrantfile
+is located) with the guest virtual machine under the `/vagrant` directory, it
+is trivially easy to keep your work saved on your host machine by keeping it
+in the `/vagrant` directory of the guest machine. This way, if you have to
+delete your virtual machine (for example, if you are upgrading to the latest
+version), you can do so without having to worry about lost work.
+
+### Adding Custom Scripts
+
+You can add custom scripts to your path by putting them in the `/home/vagrant`
+directory on the host machine. You can also add those scripts to a `bin`
+folder in the directory on your host machine where the `Vagrantfile` is
+located (since this directory is shared with `geco-vm` through the
+`/vagrant` directory).
+
+### Previewing Images with iTerm2
+
+If you are using a mac with the latest build of iTerm2, you can use `imgcat`
+to preview images on your virtual machine _right in your terminal_ during an
+ssh session. This is nice for e.g. taking a quick look at a fresh plot
+without leaving the command line.
 
 ## Developing the Base Image
-
-If you are just interested in using this tool, then the following section is not
-for you. If, however, you are interested in adding features to the base image
-(especially features that would be useful to other people), then read on.
 
 This machine is built and deployed using a tool called Packer, made by the same
 people who make Vagrant. Configuration information for creating a virtual
@@ -155,21 +140,55 @@ uses a template file (in our case, `geco-vm.json`) to specify:
   - **Post-Processors**, which package the resulting virtual machine image so
     that it can be used by Vagrant, and which automatically upload the images
     to Atlas (see below).
-    
-The image created will be available on [HashiCorp
-Atlas](https://www.hashicorp.com/atlas.html), whence it will be trivially
-easily downloadable using [Vagrant](https://www.vagrantup.com) and will run on
-[VirtualBox](https://www.virtualbox.org), all of which are free to use. There
-will be a default `Vagrantfile` provided with this repository to make it easy
-for people to get started right away.
+
+After installing the latest version of `packer`, there is one step you will
+have to take before you can build the machine for yourself. Because Atlas
+requires authentication to deploy a newly build vagrant box, you must either
+remove the final deployment step from the `ubuntu-12.04-amd64.json` template
+file, or create your own free Atlas account at atlas.hashicorp.com, create a
+new Packer project, and modify the template file to point to your now project.
+
+ 1. To remove the deployment step from the template file, delete _precisely_
+    these lines:
+    ```
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "stefco/geco-vm",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "created_at": "{{timestamp}}"
+      }
+    ```
+ 2. To point to your newly created packer project modify just the "artifact"
+    line in the above code section, changing it from:
+    ```
+      "artifact": "stefco/geco-vm",
+    ```
+    to:
+    ```
+      "artifact": "your_atlas_username/your_packer_project_name",
+    ```
+
+Now that that is finished, you can start running with
+
+```bash
+packer build ubuntu-12.04-amd64.json
+```
+
+and, after a considerable amount of time, you should have a fresh copy of
+the vm ready to play with. Of course, you can modify it as you like, and
+if you add features that will be useful to others, I will happily incorporate
+those changes into the base box.
+
+## Acknowledgements
 
 [This tutorial](http://kappataumu.com/articles/creating-an-Ubuntu-VM-with-packer.html)
 was invaluable in getting going quickly with Packer. I also found
 [this](http://blog.endpoint.com/2014/03/provisioning-development-environment.html)
 helpful. And, of course, Packer's own documentation is invaluable.
-
-Without [this ssh configuration example](https://github.com/ChiperSoft/Packer-Vagrant-Example/blob/master/packer/scripts/vagrant.sh)
-from @ChiperSoft I would remain locked out of my own box (Thanks!).
 
 As far as provisioning LIGO tools, I drew inspiration from
 [DASWG](https://www.vagrantup.com/downloads.html)'s page, from scripts written
@@ -181,7 +200,23 @@ installations, which I avoid for the sake of build speed).
 
 ## Notes on LIGO Data Grid
 
-  - **Different data is available at different sites.** See [here](https://www.lsc-group.phys.uwm.edu/lscdatagrid/resources/data/index.html) for a breakdown of what is where.
+  - **Different data is available at different sites.** See
+    [here](https://www.lsc-group.phys.uwm.edu/lscdatagrid/resources/data/index.html)
+    for a (very out-of-date) breakdown of what is where.
+
+### More information on Vagrant
+
+#### Creating a Default Vagrant File
+
+If you want to start with Vagrant's default "blank" Vagrantfile, you can
+generate one by running `vagrant init stefco/geco-vm`. This creates a 
+simple Vagrantfile for this box, with some helpful comments on how you can
+modify the file to your liking. There are a couple of features of the
+geco_vm box that are specified in the repository Vagrantfile above, so you
+should probably just go ahead and use that one.
+
+You can read Vagrant's documentation on their
+[website](https://www.vagrantup.com) for more information.
 
 ## To Do
 
