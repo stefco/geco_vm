@@ -1,0 +1,16 @@
+--- configure/os/CONFIG_SITE.linux-x86_64.linux-x86_64	2009-06-04 14:22:28.000000000 +0000
++++ configure/os/CONFIG_SITE.linux-x86_64.linux-x86_64.fixed	2016-03-23 21:30:46.596537927 +0000
+@@ -11,11 +11,11 @@
+ 
+ -include $(TOP)/configure/os/CONFIG_SITE.linux-x86.linux-x86
+ 
+-X11_LIB=/usr/lib64
++X11_LIB=/usr/lib/x86_64-linux-gnu
+ X11_INC=/usr/include
+ 
+ # OpenMotif location
+-MOTIF_LIB=/usr/lib64
++MOTIF_LIB=/usr/lib/x86_64-linux-gnu
+ MOTIF_INC=/usr/include
+ #MOTIF_LIB=/usr/X11R6/lib64
+ #MOTIF_INC=/usr/X11R6/include

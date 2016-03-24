@@ -32,6 +32,7 @@
       "hard_drive_interface": "sata",
       "headless": "{{ user `headless` }}",
       "http_directory": "http",
+      "headless": "true",
       "iso_checksum": "{{user `iso_checksum`}}",
       "iso_checksum_type": "{{user `iso_checksum_type`}}",
       "iso_url": "{{user `mirror`}}/{{user `mirror_directory`}}/{{user `iso_name`}}",
@@ -83,6 +84,11 @@
       "type": "file"
     },
     {
+      "destination": "/tmp/epics",
+      "source": "{{user `epics`}}",
+      "type": "file"
+    },
+    {
       "destination": "/tmp/build-with-autotools.sh",
       "source": "{{user `autotools`}}",
       "type": "file"
@@ -108,6 +114,7 @@
       "scripts": [
         "scripts/common/metadata.sh",
         "scripts/ubuntu/update.sh",
+        "scripts/geco/move-files.sh",
         "scripts/geco/provision.sh",
         "scripts/common/sshd.sh",
         "scripts/ubuntu/networking.sh",
@@ -115,6 +122,7 @@
         "scripts/ubuntu/vagrant.sh",
         "scripts/common/vmtools.sh",
         "scripts/ubuntu/cleanup.sh",
+        "scripts/geco/install-medm.sh",
         "scripts/geco/check-installed.sh",
         "scripts/common/minimize.sh"
       ],
@@ -132,6 +140,7 @@
     "iso_checksum_type": "sha256",
     "iso_name": "ubuntu-12.04.5-server-amd64.iso",
     "metadata": "floppy/dummy_metadata.json",
+    "epics": "http/epics",
     "autotools": "http/build-with-autotools.sh",
     "home-directory": "http/home-directory",
     "mirror": "http://releases.ubuntu.com",
