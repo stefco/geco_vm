@@ -51,7 +51,7 @@ list of available commands.
 
 ```bash
 vagrant destroy -f
-vagrant box remove -f stefco/geco-vm
+vagrant box remove -f --all stefco/geco-vm
 vagrant up
 ```
 
@@ -97,7 +97,7 @@ machine and run:
 
 ```bash
 vagrant destroy -f
-vagrant box remove -f stefco/geco-vm
+vagrant box remove -f --all stefco/geco-vm
 vagrant up
 ```
 
