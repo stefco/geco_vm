@@ -1,0 +1,34 @@
+!#/bin/bash
+
+# some helpful info
+
+cat <<__EOF__
+To open up a jupyter (nee ipython notebook) server, run
+
+    notebook
+
+and, on your host computer, navigate to localhost:8888
+
+To open up MEDM screens to the sites, make sure you have an xwindow viewer
+installed on your host computer (and restart after installing it to make sure
+that it is recognized by vagratn). Then, run
+
+    medm_lho -u <your-ligo-username>
+
+or
+
+    medm_llo -u <your-ligo-username>
+
+to see MEDM screens for each site.
+
+To log on to LIGO Data Grid, you need to authenticate by running
+
+    ligo-proxy-init <your-ligo-username>
+
+and then enter your password. Then, use `gsissh` and `gsiscp` (in place of
+ssh and scp) as you normally would to access site computers. For example,
+you can log into ldas-pcdev1 at the hanford site with
+
+    gsissh ldas-pcdev1.ligo-wa.caltech.edu
+
+__EOF__
