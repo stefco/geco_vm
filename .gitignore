@@ -5,3 +5,4 @@ packer_cache
 output-virtualbox-iso
 .DS_Store
 .vagrant
+packer-geco-vm-virtualbox

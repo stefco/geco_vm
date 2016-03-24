@@ -19,7 +19,7 @@ Vagrant.configure(2) do |config|
   ## computer. This lets you run Jupyter (aka iPython notebooks) on geco-vm and
   ## access them on the same port (8888) as you usually would in your host OS.
   ## You will be able to access them as usual 
-  # config.vm.network "forwarded_port", guest: 8888, host: 8888
+  config.vm.network "forwarded_port", guest: 8888, host: 8888
 
   ## You can increase the number of machine cores or ram available by modifying
   ## the next section. There are many ways to do this, so I leave it to you
