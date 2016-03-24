@@ -51,8 +51,9 @@ tar -zxvopf epics-patches-mac-10.9.tar.gz
 cd /opt/epics/base
 patch -p0 < ../distfiles/epics-patches-mac-10.9/epics-long-strings.diff
 cd /opt/epics/extensions
+# you can find the below file at https://raw.githubusercontent.com/stefco/geco_vm/27c2f597d2c29cd3f39e73ed0d905166a9e9a7ef/http/epics/distfiles/ubuntu-lib-locations.diff
 patch -p0 < ../distfiles/ubuntu-lib-locations.diff
-# NO NEED FOR THE MAC PATCH
+# NO NEED FOR THE MAC PATCH BELOW
 # patch -p0 < ../distfiles/epics-patches-mac-10.9/darwin-lib-locations.diff
 cd /opt/epics/extensions/src/medm$MEDM_VERSION/
 patch -p0 < ../../../distfiles/epics-patches-mac-10.9/medm-long-strings.diff
@@ -60,6 +61,7 @@ patch -p0 < ../../../distfiles/epics-patches-mac-10.9/medm-long-strings.diff
 # page but which can be found at:
 # https://www.ligo-wa.caltech.edu/%7Ejonathan.hanks/epics/tgz/epics_remote_medm-2014-11-24.tar.gz
 cd /opt/epics/extensions/src/medm$MEDM_VERSION/
+# you can find the below file at https://raw.githubusercontent.com/stefco/geco_vm/27c2f597d2c29cd3f39e73ed0d905166a9e9a7ef/http/epics/distfiles/medm3_1_7_macrofile.patch
 patch -p1 < /opt/epics/distfiles/medm3_1_7_macrofile.patch
 # Apply remote screens patches
 cd /opt/epics/extensions/src/medm$MEDM_VERSION/
