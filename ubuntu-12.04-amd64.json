@@ -84,7 +84,7 @@
     },
     {
       "destination": "/tmp/epics",
-      "source": "{{user `epics`}}/distfiles",
+      "source": "{{user `epics`}}",
       "type": "file"
     },
     {
@@ -99,7 +99,7 @@
     },
     {
       "destination": "/tmp/bin",
-      "source": "{{user `home-directory`}}/bin/",
+      "source": "{{user `home-directory`}}/bin",
       "type": "file"
     },
     {
