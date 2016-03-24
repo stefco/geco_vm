@@ -101,6 +101,8 @@ apt-get -y -qq install libffi-dev
 # some matplotlib dependencies
 apt-get -y -qq install libfreetype6-dev
 apt-get -y -qq install libpng-dev libjpeg8-dev
+# needed for making PNG files with matplotlib
+apt-get -y -qq install dvipng
 # install pip
 apt-get -y -qq install python-pip
 # need this for nds2 or something
