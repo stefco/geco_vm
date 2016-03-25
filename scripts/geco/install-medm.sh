@@ -125,12 +125,6 @@ echo \# Update PATH to include EPICS binaries >> $HOME/.bashrc
 echo export PATH=\$PATH:/opt/epics/base/bin/$EPICS_HOST_ARCH/ >> $HOME/.bashrc
 echo export PATH=\$PATH:/opt/epics/extensions/bin/$EPICS_HOST_ARCH/ >> $HOME/.bashrc
 # Delete source files to free up space
-shopt -s extglob
 rm -rf /opt/epics/distfiles
-rm -rf /opt/epics/base/!(bin|lib)
-rm -rf /opt/epics/extensions/!(bin|lib)
-shopt -u extglob
-# Check that medm was installed
-# command -v medm >/dev/null 2>&1 || { echo >&2 "I require medm but it's not installed.  Aborting."; exit 1; }
-# command -v medm_llo >/dev/null 2>&1 || { echo >&2 "I require medm_llo but it's not installed.  Aborting."; exit 1; }
-# command -v medm_lho >/dev/null 2>&1 || { echo >&2 "I require medm_lho but it's not installed.  Aborting."; exit 1; }
+cd /opt/epics/base && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
+cd /opt/epics/extensions && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
