@@ -1,0 +1,87 @@
+#!/bin/bash
+
+# go through images in the current folder
+
+case "$1" in
+    -h|--help)
+        echo "View images in the current folder."
+        echo "Usage:"
+        echo "    imgls [optional-file-extension]"
+        exit
+        ;;
+esac
+
+ext=${1:-jpg}
+files=(*$ext)
+i=0
+numfiles=${#files[@]}
+# clear the screen
+# printf "\033c"
+clear
+# print first image
+imgcat "${files[i]}"
+printf "($((i+1))/$numfiles) Filename: ${files[i]}"
+echo
+while true; do
+    if [ "$((i+1))" -lt $numfiles ]; then
+        next_cmnd=' [j] next'
+    else
+        next_cmnd=''
+    fi
+    if [ "$((i-1))" -ge 0 ]; then
+        prev_cmnd=' [k] prev'
+    else
+        prev_cmnd=''
+    fi
+
+    read -n 1 -s -p "[q] quit$next_cmnd$prev_cmnd [g] go to line" cmnd
+    num=''
+    echo
+    # clear the screen
+    # printf "\033c"
+    clear
+    case "$cmnd" in
+    q)
+        printf '\nExiting.'
+        echo
+        exit
+        ;;
+
+    j)
+        let 'i++'
+        if [ "$i" -lt $numfiles ]; then
+            imgcat "${files[i]}"
+            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
+        else
+            printf '\nAlready on last file.'
+            let 'i--'
+        fi
+        ;;
+
+    k)
+        let 'i--'
+        if [ "$i" -ge 0 ]; then
+            imgcat "${files[i]}"
+            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
+        else
+            printf '\nAlready on first file.'
+            let 'i++'
+        fi
+        ;;
+
+    g)
+        read -p 'Go to image: ' line
+        # default to i if no input; remember that this counts from 1, not 0
+        line=${line:-$((i+1))}
+        let 'line--'
+        if [ "$line" -ge 0 ] && [ "$line" -lt "$numfiles" ]; then
+            i="$line"
+            imgcat "${files[i]}"
+            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
+        else
+            echo Invalid choice.
+        fi
+
+    esac
+    echo
+done
