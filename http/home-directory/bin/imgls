@@ -49,10 +49,7 @@ while true; do
 
     j)
         let 'i++'
-        if [ "$i" -lt $numfiles ]; then
-            imgcat "${files[i]}"
-            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
-        else
+        if ! [ "$i" -lt $numfiles ]; then
             printf '\nAlready on last file.'
             let 'i--'
         fi
@@ -60,10 +57,7 @@ while true; do
 
     k)
         let 'i--'
-        if [ "$i" -ge 0 ]; then
-            imgcat "${files[i]}"
-            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
-        else
+        if ! [ "$i" -ge 0 ]; then
             printf '\nAlready on first file.'
             let 'i++'
         fi
@@ -76,12 +70,12 @@ while true; do
         let 'line--'
         if [ "$line" -ge 0 ] && [ "$line" -lt "$numfiles" ]; then
             i="$line"
-            imgcat "${files[i]}"
-            printf "($((i+1))/$numfiles) Filename: ${files[i]}"
         else
             echo Invalid choice.
         fi
 
     esac
+    imgcat "${files[i]}"
+    sleep 0.1 && echo && printf "($((i+1))/$numfiles) Filename: ${files[i]}" &
     echo
 done
