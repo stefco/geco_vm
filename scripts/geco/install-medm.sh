@@ -84,7 +84,7 @@ patch --verbose -p1 < /opt/epics/distfiles/remote_adl-2015-06-26-to-2015-06-29.d
 # This requires build-essential packages, which get uninstalled by the
 # provisioner during cleanup. If you are developing this package, you will need
 # to reinstall them manually with
-# apt-get install build-essential
+apt-get install -y -qq build-essential
 cd -P /opt/epics/base/startup
 export EPICS_HOST_ARCH=`./EpicsHostArch.pl`
 echo Epics host architecture: $EPICS_HOST_ARCH
@@ -129,7 +129,7 @@ shopt -s extglob
 rm -rf /opt/epics/distfiles
 rm -rf /opt/epics/base/!(bin|lib)
 rm -rf /opt/epics/extensions/!(bin|lib)
-shop -u extglob
+shopt -u extglob
 # Check that medm was installed
 # command -v medm >/dev/null 2>&1 || { echo >&2 "I require medm but it's not installed.  Aborting."; exit 1; }
 # command -v medm_llo >/dev/null 2>&1 || { echo >&2 "I require medm_llo but it's not installed.  Aborting."; exit 1; }
