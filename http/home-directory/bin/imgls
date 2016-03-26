@@ -11,37 +11,47 @@ case "$1" in
         ;;
 esac
 
+# styling strings
+bold="\033[1m"
+blue="\033[47;34m"
+norm="\033[0m"
+
 ext=${1:-jpg}
 files=(*$ext)
 i=0
 numfiles=${#files[@]}
-# clear the screen
-# printf "\033c"
-clear
-# print first image
-imgcat "${files[i]}"
-printf "($((i+1))/$numfiles) Filename: ${files[i]}"
-echo
 while true; do
+    this_file="${files[i]}"
+    this_line="--> $this_file ($((i+1))/$numfiles)\n"
     if [ "$((i+1))" -lt $numfiles ]; then
+        next_line="    ${files[i+1]} ($((i+2))/$numfiles)\n"
         next_cmnd=' [j] next'
     else
+        next_line='    ~~END~~\n'
         next_cmnd=''
     fi
     if [ "$((i-1))" -ge 0 ]; then
+        prev_line="    ${files[i-1]} ($((i))/$numfiles)\n"
         prev_cmnd=' [k] prev'
     else
+        prev_line='    ~~BEGINNING~~\n'
         prev_cmnd=''
     fi
+    # clear the screen
+    # printf "\033c"
+    clear
+    echo
+    # sleep 0.1 && 
+    printf "$prev_line$blue$this_line$norm$next_line"
+    imgcat "$this_file"
+    echo
 
     read -n 1 -s -p "[q] quit$next_cmnd$prev_cmnd [g] go to line" cmnd
     num=''
     echo
-    # clear the screen
-    # printf "\033c"
-    clear
     case "$cmnd" in
     q)
+        clear
         printf '\nExiting.'
         echo
         exit
@@ -75,7 +85,5 @@ while true; do
         fi
 
     esac
-    imgcat "${files[i]}"
-    sleep 0.1 && echo && printf "($((i+1))/$numfiles) Filename: ${files[i]}" &
     echo
 done
