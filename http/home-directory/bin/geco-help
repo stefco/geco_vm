@@ -2,7 +2,14 @@
 
 # some helpful info
 
-cat <<__EOF__
+cat <<__HELP__
+
+
+  ____ ____ ____ ____ 
+ ||G |||E |||C |||o ||
+ ||__|||__|||__|||__||
+ |/__\|/__\|/__\|/__\|
+
 To open up a jupyter (nee ipython notebook) server, run
 
     notebook
@@ -25,10 +32,10 @@ To log on to LIGO Data Grid, you need to authenticate by running
 
     ligo-proxy-init <your-ligo-username>
 
-and then enter your password. Then, use `gsissh` and `gsiscp` (in place of
+and then enter your password. Then, use \`gsissh\` and \`gsiscp\` (in place of
 ssh and scp) as you normally would to access site computers. For example,
 you can log into ldas-pcdev1 at the hanford site with
 
     gsissh ldas-pcdev1.ligo-wa.caltech.edu
 
-__EOF__
+__HELP__
