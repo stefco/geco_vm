@@ -4,9 +4,10 @@
 
 case "$1" in
     -h|--help)
-        echo "View images in the current folder."
+        echo "View images one-at-a-time in the current folder."
+        echo "ONLY WORKS IN ITERM2 ON MAC."
         echo "Usage:"
-        echo "    imgls [optional-file-extension]"
+        echo "    imgless [optional-file-extension]"
         exit
         ;;
 esac
