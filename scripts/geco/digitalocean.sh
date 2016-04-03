@@ -14,5 +14,5 @@ chmod 600 /mnt/2GiB.swap
 mkswap /mnt/2GiB.swap
 swapon /mnt/2GiB.swap
 echo '/mnt/2GiB.swap  none  swap  sw  0 0' >> /etc/fstab
-echo Swap should now be available; running free:
+echo Swap should now be available. running free:
 free
