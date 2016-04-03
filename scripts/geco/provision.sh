@@ -6,7 +6,7 @@
 echo "set grub-pc/install_devices /dev/sda" | debconf-communicate
 
 # move build-with-autotools file around as needed.
-export HOME="/home/vagrant"
+echo HOME DIRECTORY SET BY PACKER: ${HOME}
 if [ -e /vagrant/build-with-autotools.sh ]; then
     echo build-with-autotools.sh found in vagrant directory.
     cp /vagrant/build-with-autotools.sh $HOME/build-with-autotools.sh
