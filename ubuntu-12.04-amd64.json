@@ -1,6 +1,14 @@
 {
   "builders": [
     {
+      "type": "digitalocean",
+      "snapshot_name": "geco-vm-{{timestamp}}",
+      "api_token": "{{user `digitalocean_api_key`}}",
+      "region": "nyc3",
+      "size": "2gb",
+      "image": "ubuntu-12-04-x64"
+    },
+    {
       "boot_command": [
         "<esc><wait>",
         "<esc><wait>",
@@ -79,6 +87,20 @@
   ],
   "provisioners": [
     {
+      "only": ["digitalocean"],
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "scripts": [
+        "scripts/geco/digitalocean.sh"
+      ],
+      "type": "shell"
+    },
+    {
       "destination": "/tmp/bento-metadata.json",
       "source": "{{user `metadata`}}",
       "type": "file"
@@ -116,13 +138,38 @@
         "scripts/geco/no-docs.sh",
         "scripts/ubuntu/update.sh",
         "scripts/geco/move-files.sh",
-        "scripts/geco/provision.sh",
+        "scripts/geco/provision.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "except": ["digitalocean"],
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "scripts": [
         "scripts/common/sshd.sh",
         "scripts/ubuntu/networking.sh",
         "scripts/ubuntu/sudoers.sh",
         "scripts/ubuntu/vagrant.sh",
         "scripts/common/vmtools.sh",
-        "scripts/ubuntu/cleanup.sh",
+        "scripts/ubuntu/cleanup.sh"
+      ],
+      "type": "shell"
+    },
+    {
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "scripts": [
         "scripts/geco/install-medm.sh",
         "scripts/geco/check-installed.sh",
         "scripts/common/minimize.sh"

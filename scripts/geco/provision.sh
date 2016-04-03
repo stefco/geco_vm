@@ -1,4 +1,4 @@
-# By Stefan with much help from Szabi and Petr.
+# Stefan Countryman 4/3/2016
 
 # prevent grub from launching gui on upgrade
 # from: https://github.com/mitchellh/vagrant/issues/289
@@ -116,6 +116,9 @@ apt-get -y -qq install swig
 apt-get -y -qq install python-numpy
 apt-get -y -qq install python-scipy
 apt-get -y -qq install bc
+# gwpy-dependencies
+apt-get -y -qq install python-matplotlib
+apt-get -y -qq install python-h5py
 # nds2 dependencies
 apt-get -y -qq install libsasl2-2
 # glue dependencies
