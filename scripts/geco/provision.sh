@@ -1,4 +1,4 @@
-# By Stefan with much help from Szabi and Petr.
+# Stefan Countryman 4/3/2016
 
 # prevent grub from launching gui on upgrade
 # from: https://github.com/mitchellh/vagrant/issues/289
@@ -6,7 +6,7 @@
 echo "set grub-pc/install_devices /dev/sda" | debconf-communicate
 
 # move build-with-autotools file around as needed.
-export HOME="/home/vagrant"
+echo HOME DIRECTORY SET BY PACKER: ${HOME}
 if [ -e /vagrant/build-with-autotools.sh ]; then
     echo build-with-autotools.sh found in vagrant directory.
     cp /vagrant/build-with-autotools.sh $HOME/build-with-autotools.sh
@@ -116,6 +116,9 @@ apt-get -y -qq install swig
 apt-get -y -qq install python-numpy
 apt-get -y -qq install python-scipy
 apt-get -y -qq install bc
+# gwpy-dependencies
+apt-get -y -qq install python-matplotlib
+apt-get -y -qq install python-h5py
 # nds2 dependencies
 apt-get -y -qq install libsasl2-2
 # glue dependencies
@@ -259,17 +262,6 @@ apt-get -y -qq install screen
 apt-get -y -qq install tmux
 apt-get -y -qq install tree
 apt-get -y -qq install ranger
-if [ -e /tmp/.bashrc ]; then
-    cat /tmp/.bashrc >> "$HOME"/.bashrc
-fi
-if [ -e /tmp/bin ]; then
-    if ! [ -e "$HOME"/bin ]; then
-        mkdir "$HOME"/bin
-    fi
-    mv --no-clobber /tmp/bin/* "$HOME"/bin
-    chmod +x -R "$HOME"/bin
-    echo export PATH=\"/vagrant:$HOME/bin:\$PATH\" >> ~/.bashrc
-fi
 
 cat <<__MSG__
 ***********************************************************
