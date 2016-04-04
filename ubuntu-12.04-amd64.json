@@ -5,7 +5,7 @@
       "snapshot_name": "geco-vm-{{timestamp}}",
       "api_token": "2221120a1ebd69bc1143e2bb19d32a2e09dca7c089cd7520a70deab0e689eda8",
       "region": "nyc3",
-      "size": "2gb",
+      "size": "512mb",
       "image": "ubuntu-12-04-x64"
     },
     {
