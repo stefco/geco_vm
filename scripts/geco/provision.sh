@@ -261,6 +261,7 @@ apt-get -y -qq install ncdu
 apt-get -y -qq install screen
 apt-get -y -qq install tmux
 apt-get -y -qq install tree
+apt-get -y -qq install zip
 apt-get -y -qq install ranger
 
 cat <<__MSG__
