@@ -263,6 +263,8 @@ apt-get -y -qq install tmux
 apt-get -y -qq install tree
 apt-get -y -qq install zip
 apt-get -y -qq install ranger
+wget -O $HOME/bin \
+    https://github.com/andreafabrizi/Dropbox-Uploader/raw/master/dropbox_uploader.sh
 
 cat <<__MSG__
 ***********************************************************
