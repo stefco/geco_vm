@@ -59,6 +59,30 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--accelerate2dvideo",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--accelerate3d",
+          "on"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--clipboard",
+          "bidirectional"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
+          "--draganddrop",
+          "hosttoguest"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
           "--cpus",
           "2"
         ]

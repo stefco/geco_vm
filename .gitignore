@@ -6,4 +6,5 @@ output-virtualbox-iso
 .DS_Store
 .vagrant
 packer-geco-vm-virtualbox
+packer-geco-vm-gui-virtualbox
 /bin
