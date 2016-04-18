@@ -47,8 +47,14 @@
         [
           "modifyvm",
           "{{.Name}}",
+          "--vram",
+          "256"
+        ],
+        [
+          "modifyvm",
+          "{{.Name}}",
           "--memory",
-          "1024"
+          "2048"
         ],
         [
           "modifyvm",
@@ -114,9 +120,9 @@
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "scripts": [
         "scripts/common/metadata.sh",
-        "scripts/geco/desktop.sh",
         "scripts/ubuntu/update.sh",
         "scripts/geco/move-files.sh",
+        "scripts/geco/desktop.sh",
         "scripts/geco/provision.sh"
       ],
       "type": "shell"
