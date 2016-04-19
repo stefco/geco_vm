@@ -286,6 +286,18 @@ julia --eval 'Pkg.add("IJulia")'
 chown -R vagrant $HOME
 
 cat <<__MSG__
+***********************************************************
+*
+*
+* POPULATING /ETC/SKEL
+*
+*
+************************************************************
+__MSG__
+# new users get files copied over from this directory
+cp -R $HOME /etc/skel
+
+cat <<__MSG__
 ************************************************************
 *
 *
