@@ -1,4 +1,5 @@
 *.swp
+*.swo
 packer
 packer_cache
 *.box
