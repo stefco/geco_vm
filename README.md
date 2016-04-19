@@ -1,9 +1,31 @@
 # GECo Virtual Machine
 
+## Quick Start
+
+To get going quickly:
+
+ 1. Install [VirtualBox](https://www.virtualbox.org/wiki/Downloads) and
+    [Vagrant](https://www.vagrantup.com/downloads.html).
+ 2. Download the GECo VM 
+    [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04-gui/Vagrantfile)
+    and save it in the directory where you plan do do your work.
+ 3. Open a terminal, change to the directory where you saved your Vagrantfile,
+    and run `vagrant up` to download and start the machine. A window with the
+    virtual machine's desktop should pop up. Run 'vagrant halt` while in that
+    same directory to shut the machine down.
+ 4. Either log into the desktop interface (both password and username are
+    "vagrant") or log in via ssh by running `vagrant ssh` on your host computer
+    while in the Vagrantfile directory.
+
+That's it! See more instructions and tips below.
+
 ## Contents
 
+  - [Quick Start](#quick-start)
+  - [Contents](#contents)
   - [Introduction](#introduction)
   - [Using the Virtual Machine](#using-the-virtual-machine)
+      - [GUI vs. No-GUI](gui-vs-no-gui)
       - [Installing and Getting Started](#installing-and-getting-started)
       - [Updating to the Latest Version of the VM](#updating-to-the-latest-version-of-the-vm)
   - [Pro Tips](#pro-tips)
@@ -17,14 +39,34 @@
 This is a virtual machine with all important LIGO-related software
 pre-installed.
 
-I am building this because dealing with LIGO's dependencies is a hassle and
-a waste of time. Doing any work at remotely is a difficult proposition (unless
-you are `ssh`ed into a LIGO server, which is frequently impossible or
-undesirable), and setup is not uniform across OSes.
-I imagine I am not the only one who has this problem, so I hope that others
-might find this useful.
+I am building this because dealing with LIGO's toolkit dependencies is a hassle
+and, for researchers who just need to get going with their work, a waste of
+time. Doing any work at remotely is a difficult proposition (unless you are
+`ssh`ed into a LIGO server, which is sometimes impossible or undesirable, and
+in any case requires credentials and its own special software for anything
+besides SSH), and setup instructions are not uniform across OSes. [My
+group](http://geco.markalab.org) at Columbia University is currently using this
+Virtual Machine to avoid all of these issues, but I imagine we are not the only
+ones who have encountered these hurdles, so I hope that other labs might find
+this useful.
 
 ## Using the Virtual Machine
+
+### GUI vs. No-GUI
+
+**There are two versions of `geco-vm`:** one _with_ a GUI (graphical user
+interface) and one without. The GUI version is called `geco-vm-gui`; it is the
+more beginner-friendly version. It is more resource intensive, however, and is
+only available for desktop (not server) use. If you know what you are doing and
+prefer working from the command line anyway, or if performance and resource
+usage are important considerations, you should use the headless (i.e.
+GUI-free), lightweight `geco-vm`; otherwise, `geco-vm-gui` has all the same
+capabilities but comes with a familiar desktop interface and nice features like
+shared clipboard (you can copy text within the virtual machine and paste it in
+your host computer, and vice versa) and drag-and-drop file movement (this
+feature only works for dragging files into the VM). See the [Pro
+Tips](#pro-tips) section below for more information applicable to both GUI and
+headless version.
 
 ### Installing and Getting Started
 
@@ -33,12 +75,15 @@ to get started. These instructions should work on any system.
 
  1. Download and install the latest version of [VirtualBox](https://www.virtualbox.org/wiki/Downloads).
  2. Download and install the latest version of [Vagrant](https://www.vagrantup.com/downloads.html)
- 3. Download this repository's [Vagrantfile](https://github.com/stefco/geco_vm/raw/master/Vagrantfile)
-    to the folder you want to work in, or
-    [create a default Vagrantfile](#creating-a-default-vagrant-file)
-    if you'd like a fresh start.
+ 3. Download either the
+    [GUI Vagrantfile](https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04-gui/Vagrantfile)
+    or the
+    [headless Vagrantfile](https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04/Vagrantfile)
+    to the folder you want to work in.
  4. Run `vagrant up` to download and boot the virtual machine.
- 5. Run `vagrant ssh` to start using the virtual machine.
+ 5. Run `vagrant ssh` to start using the virtual machine; for the GUI version,
+    you can also just log in through the window that pops up using "vagrant"
+    as both your username and password.
 
 That's it. Once you are `ssh`ed into the guest machine, it is just like using
 `ssh` with any other machine. You can run `exit` to return to the host machine.
