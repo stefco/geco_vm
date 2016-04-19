@@ -185,6 +185,20 @@
         "scripts/common/minimize.sh"
       ],
       "type": "shell"
+    },
+    {
+      "environment_vars": [
+        "HOME_DIR=/home/vagrant",
+        "HOME=/home/vagrant",
+        "http_proxy={{user `http_proxy`}}",
+        "https_proxy={{user `https_proxy`}}",
+        "no_proxy={{user `no_proxy`}}"
+      ],
+      "execute_command": "sh -eux '{{.Path}}'",
+      "scripts": [
+        "scripts/geco/desktop-user-prefs.sh"
+      ],
+      "type": "shell"
     }
   ],
   "variables": {
