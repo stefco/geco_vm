@@ -1,0 +1,11 @@
+#!/bin/bash
+
+# build the PATH variable from scratch, since our environment seems funky
+export PATH='/opt/epics/extensions/bin/linux-x86_64:/home/vagrant/bin':"$(
+    sed -n 's/^PATH="\([^"]*\)"$/\1/p' \
+    /etc/environment
+)" 
+echo "Launching MEDM screens for LHO."
+echo "Press Control-C to quit."
+read -p "Your LIGO username: " uname
+medm_lho -u "${uname}"
