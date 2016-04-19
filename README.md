@@ -13,9 +13,10 @@ To get going quickly:
     and run `vagrant up` to download and start the machine. A window with the
     virtual machine's desktop should pop up. Run 'vagrant halt` while in that
     same directory to shut the machine down.
- 4. Either log into the desktop interface (both password and username are
-    "vagrant") or log in via ssh by running `vagrant ssh` on your host computer
-    while in the Vagrantfile directory.
+ 4. Either log into the desktop interface (it should log in automatically, but
+ for reference, both password and username are "vagrant") or log in via ssh by
+    running `vagrant ssh` on your host computer while in the Vagrantfile
+    directory.
 
 That's it! See more instructions and tips below.
 
@@ -81,14 +82,16 @@ to get started. These instructions should work on any system.
     [headless Vagrantfile](https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04/Vagrantfile)
     to the folder you want to work in.
  4. Run `vagrant up` to download and boot the virtual machine.
- 5. Run `vagrant ssh` to start using the virtual machine; for the GUI version,
-    you can also just log in through the window that pops up using "vagrant"
-    as both your username and password.
+ 5. Run `vagrant ssh` to start using the virtual machine; **for the GUI
+    version**, you can just use the virtual machine window that
+    pops. It should log you in automatically when the VM starts up. For
+    reference, the username and password are both "vagrant".
 
-That's it. Once you are `ssh`ed into the guest machine, it is just like using
-`ssh` with any other machine. You can run `exit` to return to the host machine.
-While not using the guest machine, you can simply run `vagrant` to get a short
-list of available commands.
+That's it! Once you are `ssh`ed into the guest machine, it is just like using
+`ssh` with any other machine. Similarly, the GUI expriece should be just like
+using any Ubuntu box. While `ssh`ed, you can run `exit` to return to the host
+machine.  While not using the guest machine, you can simply run `vagrant` to
+get a short list of available commands for managing this VM.
 
 ### Updating to the Latest Version of the VM
 
