@@ -65,12 +65,20 @@ for reference, both password and username are "vagrant") or log in via ssh by
 <a href="#using-the-virtual-machine">Using the Virtual Machine</a>
 
 <ul>
-<li><a href="gui-vs-no-gui">GUI vs. No-GUI</a></li>
+<li><a href="#gui-vs-no-gui">GUI vs. No-GUI</a></li>
 <li><a href="#installing-and-getting-started">Installing and Getting Started</a></li>
 <li><a href="#updating-to-the-latest-version-of-the-vm">Updating to the Latest Version of the VM</a></li>
 </ul>
 </li>
-<li><a href="#pro-tips">Pro Tips</a></li>
+<li>
+<a href="#pro-tips">Pro Tips</a>
+
+<ul>
+<li><a href="#vagrant-best-practices">Vagrant Best Practices</a></li>
+<li><a href="#adding-custom-scripts">Adding Custom Scripts</a></li>
+<li><a href="#previewing-images-with-iterm2">Previewing Images with iTerm2</a></li>
+</ul>
+</li>
 <li><a href="#developing-the-base-image">Developing the Base Image</a></li>
 <li><a href="#acknowledgements">Acknowledgements</a></li>
 <li><a href="#more-information-on-vagrant">More information on Vagrant</a></li>
@@ -149,7 +157,8 @@ get a short list of available commands for managing this VM.</p>
 <a id="tldr" class="anchor" href="#tldr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TL;DR:</h4>
 
 <div class="highlight highlight-source-shell"><pre>vagrant destroy -f
-vagrant box remove -f --all stefco/geco-vm
+<span class="pl-c"># if you are using the headless geco-vm, write geco-vm instead of geco-vm-gui</span>
+vagrant box remove -f --all stefco/geco-vm-gui
 vagrant up</pre></div>
 
 <h4>
@@ -168,12 +177,14 @@ following:</p>
 <ol>
 <li>Checks whether you already have a copy of <code>stefco/geco-vm</code> saved in vagrant's
 cache of vagrant boxes</li>
-<li>Downloads the latest copy of <code>stefco/geco-vm</code> if you do not have a local
-copy; if you <strong>do</strong> have a local copy, <strong>even if it is outdated</strong>, vagrant
-will use that one</li>
-<li>Decompresses and copies your local copy of the <code>stefco/geco-vm</code> box and
-stores that fresh copy of the virtual machine in the <code>~/Virtualbox\ VMs</code>
-directory; this copy will be the virtual machine you use</li>
+<li>Downloads the latest copy of <code>stefco/geco-vm-gui</code> or <code>stefco/geco-vm</code>
+(depending on which you are using) if you do not have a local copy; if you
+<strong>do</strong> have a local copy, <strong>even if it is outdated</strong>, vagrant will use that
+one</li>
+<li>Decompresses and copies your local copy of the <code>stefco/geco-vm-gui</code> or
+<code>stefco/geco-vm</code> box and stores that fresh copy of the virtual machine in the
+<code>~/Virtualbox\ VMs</code> directory; this copy will be the virtual machine you
+use</li>
 <li>Starts up the new machine</li>
 <li>Runs any provisioning scripts that you specify
 (which allow you to further customize the box before you use it)</li>
@@ -199,7 +210,8 @@ you should make sure you are in your vagrant working directory on your host
 machine and run:</p>
 
 <div class="highlight highlight-source-shell"><pre>vagrant destroy -f
-vagrant box remove -f --all stefco/geco-vm
+<span class="pl-c"># if you are using the headless geco-vm, write geco-vm instead of geco-vm-gui</span>
+vagrant box remove -f --all stefco/geco-vm-gui
 vagrant up</pre></div>
 
 <p>You can check on your cached version of this (and all) vagrant boxes by running
