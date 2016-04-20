@@ -1,0 +1,356 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Geco vm by stefco</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <meta name="viewport" content="width=device-width">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1>Geco vm</h1>
+        <p>All the tools you need to work with LIGO, always up-to-date, in one easy Vagrant box.</p>
+
+        <p class="view"><a href="https://github.com/stefco/geco_vm">View the Project on GitHub <small>stefco/geco_vm</small></a></p>
+
+
+        <ul>
+          <li><a href="https://github.com/stefco/geco_vm/zipball/master">Download <strong>ZIP File</strong></a></li>
+          <li><a href="https://github.com/stefco/geco_vm/tarball/master">Download <strong>TAR Ball</strong></a></li>
+          <li><a href="https://github.com/stefco/geco_vm">View On <strong>GitHub</strong></a></li>
+        </ul>
+      </header>
+      <section>
+        <h1>
+<a id="geco-virtual-machine" class="anchor" href="#geco-virtual-machine" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GECo Virtual Machine</h1>
+
+<h2>
+<a id="quick-start" class="anchor" href="#quick-start" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Quick Start</h2>
+
+<p>To get going quickly:</p>
+
+<ol>
+<li>Install <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a> and
+<a href="https://www.vagrantup.com/downloads.html">Vagrant</a>.</li>
+<li>Download the GECo VM 
+<a href="https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04-gui/Vagrantfile">Vagrantfile</a>
+and save it in the directory where you plan do do your work.</li>
+<li>Open a terminal, change to the directory where you saved your Vagrantfile,
+and run <code>vagrant up</code> to download and start the machine. A window with the
+virtual machine's desktop should pop up. Run <code>vagrant halt</code> while in that
+same directory to shut the machine down.</li>
+<li>Either log into the desktop interface (it should log in automatically, but
+for reference, both password and username are "vagrant") or log in via ssh by
+  running <code>vagrant ssh</code> on your host computer while in the Vagrantfile
+  directory.</li>
+</ol>
+
+<p>That's it! See more instructions and tips below.</p>
+
+<h2>
+<a id="contents" class="anchor" href="#contents" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Contents</h2>
+
+<ul>
+<li><a href="#quick-start">Quick Start</a></li>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a></li>
+<li>
+<a href="#using-the-virtual-machine">Using the Virtual Machine</a>
+
+<ul>
+<li><a href="gui-vs-no-gui">GUI vs. No-GUI</a></li>
+<li><a href="#installing-and-getting-started">Installing and Getting Started</a></li>
+<li><a href="#updating-to-the-latest-version-of-the-vm">Updating to the Latest Version of the VM</a></li>
+</ul>
+</li>
+<li><a href="#pro-tips">Pro Tips</a></li>
+<li><a href="#developing-the-base-image">Developing the Base Image</a></li>
+<li><a href="#acknowledgements">Acknowledgements</a></li>
+<li><a href="#more-information-on-vagrant">More information on Vagrant</a></li>
+<li><a href="#to-do">To Do</a></li>
+</ul>
+
+<h2>
+<a id="introduction" class="anchor" href="#introduction" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Introduction</h2>
+
+<p>This is a virtual machine with all important LIGO-related software
+pre-installed.</p>
+
+<p>I am building this because dealing with LIGO's toolkit dependencies is a hassle
+and, for researchers who just need to get going with their work, a waste of
+time. Doing any work at remotely is a difficult proposition (unless you are
+<code>ssh</code>ed into a LIGO server, which is sometimes impossible or undesirable, and
+in any case requires credentials and its own special software for anything
+besides SSH), and setup instructions are not uniform across OSes. <a href="http://geco.markalab.org">My
+group</a> at Columbia University is currently using this
+Virtual Machine to avoid all of these issues, but I imagine we are not the only
+ones who have encountered these hurdles, so I hope that other labs might find
+this useful.</p>
+
+<h2>
+<a id="using-the-virtual-machine" class="anchor" href="#using-the-virtual-machine" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Using the Virtual Machine</h2>
+
+<h3>
+<a id="gui-vs-no-gui" class="anchor" href="#gui-vs-no-gui" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>GUI vs. No-GUI</h3>
+
+<p><strong>There are two versions of <code>geco-vm</code>:</strong> one <em>with</em> a GUI (graphical user
+interface) and one without. The GUI version is called <code>geco-vm-gui</code>; it is the
+more beginner-friendly version. It is more resource intensive, however, and is
+only available for desktop (not server) use. If you know what you are doing and
+prefer working from the command line anyway, or if performance and resource
+usage are important considerations, you should use the headless (i.e.
+GUI-free), lightweight <code>geco-vm</code>; otherwise, <code>geco-vm-gui</code> has all the same
+capabilities but comes with a familiar desktop interface and nice features like
+shared clipboard (you can copy text within the virtual machine and paste it in
+your host computer, and vice versa) and drag-and-drop file movement (this
+feature only works for dragging files into the VM). See the <a href="#pro-tips">Pro
+Tips</a> section below for more information applicable to both GUI and
+headless version.</p>
+
+<h3>
+<a id="installing-and-getting-started" class="anchor" href="#installing-and-getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Installing and Getting Started</h3>
+
+<p>If you just want to <em>use</em> the virtual machine, you can follow these instructions
+to get started. These instructions should work on any system.</p>
+
+<ol>
+<li>Download and install the latest version of <a href="https://www.virtualbox.org/wiki/Downloads">VirtualBox</a>.</li>
+<li>Download and install the latest version of <a href="https://www.vagrantup.com/downloads.html">Vagrant</a>
+</li>
+<li>Download either the
+<a href="https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04-gui/Vagrantfile">GUI Vagrantfile</a>
+or the
+<a href="https://github.com/stefco/geco_vm/raw/master/vagrantfiles/ubuntu-12.04/Vagrantfile">headless Vagrantfile</a>
+to the folder you want to work in.</li>
+<li>Run <code>vagrant up</code> to download and boot the virtual machine.</li>
+<li>Run <code>vagrant ssh</code> to start using the virtual machine; <strong>for the GUI
+version</strong>, you can just use the virtual machine window that
+pops. It should log you in automatically when the VM starts up. For
+reference, the username and password are both "vagrant".</li>
+</ol>
+
+<p>That's it! Once you are <code>ssh</code>ed into the guest machine, it is just like using
+<code>ssh</code> with any other machine. Similarly, the GUI expriece should be just like
+using any Ubuntu box. While <code>ssh</code>ed, you can run <code>exit</code> to return to the host
+machine.  While not using the guest machine, you can simply run <code>vagrant</code> to
+get a short list of available commands for managing this VM.</p>
+
+<h3>
+<a id="updating-to-the-latest-version-of-the-vm" class="anchor" href="#updating-to-the-latest-version-of-the-vm" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Updating to the Latest Version of the VM</h3>
+
+<h4>
+<a id="tldr" class="anchor" href="#tldr" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>TL;DR:</h4>
+
+<div class="highlight highlight-source-shell"><pre>vagrant destroy -f
+vagrant box remove -f --all stefco/geco-vm
+vagrant up</pre></div>
+
+<h4>
+<a id="full-instructions-with-explanation" class="anchor" href="#full-instructions-with-explanation" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Full Instructions, With Explanation</h4>
+
+<p>It is easy to make mistakes while upgrading to the latest version of
+vagrant if you don't know what you're doing. This can cause you to waste
+hours troubleshooting a broken feature that has been fixed on the latest
+version of the box simply because you think you've already upgraded (when
+in fact you haven't). Knowing how vagrant works
+can help immensely in avoiding this peculiar debugging hell.</p>
+
+<p>When you initialize your virtual machine with <code>vagrant up</code>, vagrant does the
+following:</p>
+
+<ol>
+<li>Checks whether you already have a copy of <code>stefco/geco-vm</code> saved in vagrant's
+cache of vagrant boxes</li>
+<li>Downloads the latest copy of <code>stefco/geco-vm</code> if you do not have a local
+copy; if you <strong>do</strong> have a local copy, <strong>even if it is outdated</strong>, vagrant
+will use that one</li>
+<li>Decompresses and copies your local copy of the <code>stefco/geco-vm</code> box and
+stores that fresh copy of the virtual machine in the <code>~/Virtualbox\ VMs</code>
+directory; this copy will be the virtual machine you use</li>
+<li>Starts up the new machine</li>
+<li>Runs any provisioning scripts that you specify
+(which allow you to further customize the box before you use it)</li>
+<li>Mounts shared folders</li>
+</ol>
+
+<p>Note the following:</p>
+
+<ul>
+<li>Simply updating your cached vagrant box to the latest version with
+<code>vagrant box update</code> will only update your cached box; <strong>this alone will
+not have any effect on the virtual machine you are already using.</strong>
+</li>
+<li>Destroying and recreating your machine using <code>vagrant destroy -f</code>
+followed by <code>vagrant up</code> will just create a fresh version of the old
+box; you need to make sure you also update the cached
+copy of the vagrant box using <code>vagrant box update</code> before you
+reinitialize the virtual machine.</li>
+</ul>
+
+<p>So, to make sure you are using the latest and greatest version of <code>stefco/geco-vm</code>,
+you should make sure you are in your vagrant working directory on your host
+machine and run:</p>
+
+<div class="highlight highlight-source-shell"><pre>vagrant destroy -f
+vagrant box remove -f --all stefco/geco-vm
+vagrant up</pre></div>
+
+<p>You can check on your cached version of this (and all) vagrant boxes by running
+<code>vagrant box list</code>, and you can see whether you successfully deleted your
+running copy of the virtual machine by running <code>vagrant status</code>.</p>
+
+<h2>
+<a id="pro-tips" class="anchor" href="#pro-tips" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Pro-Tips</h2>
+
+<h4>
+<a id="vagrant-best-practices" class="anchor" href="#vagrant-best-practices" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Vagrant Best Practices</h4>
+
+<p>You should think of your virtual machine as disposable; ideally, you should
+not store any information on it long term. Because Vagrant 
+<a href="https://www.vagrantup.com/docs/getting-started/synced_folders.html">automatically shares</a>
+your host computer's vagrant folder (i.e. the folder in which your Vagrantfile
+is located) with the guest virtual machine under the <code>/vagrant</code> directory, it
+is trivially easy to keep your work saved on your host machine by keeping it
+in the <code>/vagrant</code> directory of the guest machine. This way, if you have to
+delete your virtual machine (for example, if you are upgrading to the latest
+version), you can do so without having to worry about lost work.</p>
+
+<h4>
+<a id="adding-custom-scripts" class="anchor" href="#adding-custom-scripts" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Adding Custom Scripts</h4>
+
+<p>You can add custom scripts to your path by putting them in the <code>/home/vagrant</code>
+directory on the host machine. You can also add those scripts to a <code>bin</code>
+folder in the directory on your host machine where the <code>Vagrantfile</code> is
+located (since this directory is shared with <code>geco-vm</code> through the
+<code>/vagrant</code> directory).</p>
+
+<h4>
+<a id="previewing-images-with-iterm2" class="anchor" href="#previewing-images-with-iterm2" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Previewing Images with iTerm2</h4>
+
+<p>If you are using a mac with the latest build of
+<a href="http://iterm2.com/downloads.html">iTerm2</a> (something I highly recommend, since
+iTerm2 is an excellent terminal emulator), you can use <code>imgcat</code> to preview
+images on your virtual machine <em>right in your terminal</em> during an
+ssh session. This is nice for e.g. taking a quick look at a fresh plot
+without leaving the command line.</p>
+
+<h2>
+<a id="developing-the-base-image" class="anchor" href="#developing-the-base-image" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Developing the Base Image</h2>
+
+<p>This machine is built and deployed using a tool called Packer, made by the same
+people who make Vagrant. Configuration information for creating a virtual
+machine using <a href="https://www.packer.io/">Packer</a> can be found on their 
+website. The important idea, though, is that Packer
+uses a template file (in our case, <code>geco-vm.json</code>) to specify:</p>
+
+<ul>
+<li>
+<strong>Builders</strong>, which take an installation disk image (Ubuntu 12.04 LTS
+64-bit, in our case) and make a fresh installation in a new virtual
+machine using the providers of your choice (for us, only VirtualBox, though
+you can get crazy with VMWare, DigitalOcean, Amazon AWS, Docker, etc.)</li>
+<li>
+<strong>Provisioners</strong>, which handle file-copying and script running (usually
+runnning a dependency install script, like <code>provision.sh</code>, in our case);
+this is the part where you get to customize the box with whatever you need.</li>
+<li>
+<strong>Post-Processors</strong>, which package the resulting virtual machine image so
+that it can be used by Vagrant, and which automatically upload the images
+to Atlas (see below).</li>
+</ul>
+
+<p>After installing the latest version of <code>packer</code>, there is one step you will
+have to take before you can build the machine for yourself. Because Atlas
+requires authentication to deploy a newly build vagrant box, you must either:</p>
+
+<ol>
+<li>Remove the final deployment step from the <code>ubuntu-12.04-amd64.json</code> template
+file, or</li>
+<li>Create your own free Atlas account at atlas.hashicorp.com, create a
+new Packer project, and modify the template file to point to your now project.</li>
+</ol>
+
+<p><strong>To remove the deployment step</strong> from the template file, delete <em>precisely</em>
+these lines:</p>
+
+<pre><code>    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "stefco/geco-vm",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "created_at": "{{timestamp}}"
+      }
+</code></pre>
+
+<p><strong>To point to your newly created packer project</strong>, modify <em>only</em> the
+"artifact" line in the above code section, changing it from:</p>
+
+<pre><code>"artifact": "stefco/geco-vm",
+</code></pre>
+
+<p>to:</p>
+
+<pre><code>"artifact": "your_atlas_username/your_packer_project_name",
+</code></pre>
+
+<p>Now that that is finished, you can start running with</p>
+
+<div class="highlight highlight-source-shell"><pre>packer build ubuntu-12.04-amd64.json</pre></div>
+
+<p>and, after a considerable amount of time, you should have a fresh copy of
+the vm ready to play with.</p>
+
+<p>Of course, you can modify it as you like, and
+if you add features that will be useful to others, I will happily incorporate
+those changes into the base box.</p>
+
+<h2>
+<a id="acknowledgements" class="anchor" href="#acknowledgements" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Acknowledgements</h2>
+
+<p><a href="http://kappataumu.com/articles/creating-an-Ubuntu-VM-with-packer.html">This tutorial</a>
+was invaluable in getting going quickly with Packer. I also found
+<a href="http://blog.endpoint.com/2014/03/provisioning-development-environment.html">this</a>
+helpful. And, of course, Packer's own documentation is invaluable.</p>
+
+<p>As far as provisioning LIGO tools, I drew inspiration from
+<a href="https://www.vagrantup.com/downloads.html">DASWG</a>'s page, from scripts written
+by Szabi for provisioning his own Debian box, from conversations with people at
+the observatories, and from the gwpy .travis.yml configuration scripts. There
+are also plenty of good <a href="https://wiki.ligo.org/RemoteAccess/WebHome">instructions</a>
+on various remote access topics on the LIGO wiki.</p>
+
+<h2>
+<a id="more-information-on-vagrant" class="anchor" href="#more-information-on-vagrant" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>More information on Vagrant</h2>
+
+<h4>
+<a id="creating-a-default-vagrant-file" class="anchor" href="#creating-a-default-vagrant-file" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Creating a Default Vagrant File</h4>
+
+<p>If you want to start with Vagrant's default "blank" Vagrantfile, you can
+generate one by running <code>vagrant init stefco/geco-vm</code>. This creates a 
+simple Vagrantfile for this box, with some helpful comments on how you can
+modify the file to your liking. There are a couple of features of the
+geco_vm box that are specified in the repository Vagrantfile above, so you
+should probably just go ahead and use that one.</p>
+
+<p>You can read Vagrant's documentation on their
+<a href="https://www.vagrantup.com">website</a> for more information.</p>
+      </section>
+      <footer>
+        <p>This project is maintained by <a href="https://github.com/stefco">stefco</a></p>
+        <p><small>Hosted on GitHub Pages &mdash; Theme by <a href="https://github.com/orderedlist">orderedlist</a></small></p>
+      </footer>
+    </div>
+    <script src="javascripts/scale.fix.js"></script>
+    
+  </body>
+</html>
