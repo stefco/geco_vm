@@ -192,14 +192,6 @@
       "type": "shell"
     },
     {
-      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
-      "inline": [
-        "reboot",
-        "sleep 60"
-      ],
-      "type": "shell"
-    },
-    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "HOME=/home/vagrant",
