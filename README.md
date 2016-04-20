@@ -11,7 +11,7 @@ To get going quickly:
     and save it in the directory where you plan do do your work.
  3. Open a terminal, change to the directory where you saved your Vagrantfile,
     and run `vagrant up` to download and start the machine. A window with the
-    virtual machine's desktop should pop up. Run 'vagrant halt` while in that
+    virtual machine's desktop should pop up. Run `vagrant halt` while in that
     same directory to shut the machine down.
  4. Either log into the desktop interface (it should log in automatically, but
  for reference, both password and username are "vagrant") or log in via ssh by
