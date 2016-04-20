@@ -134,6 +134,11 @@
       "type": "file"
     },
     {
+      "destination": "/tmp/.medm_launcher",
+      "source": "{{user `home-directory`}}/.medm_launcher",
+      "type": "file"
+    },
+    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "HOME=/home/vagrant",
@@ -187,6 +192,14 @@
       "type": "shell"
     },
     {
+      "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
+      "inline": [
+        "reboot",
+        "sleep 60"
+      ],
+      "type": "shell"
+    },
+    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "HOME=/home/vagrant",
@@ -194,7 +207,7 @@
         "https_proxy={{user `https_proxy`}}",
         "no_proxy={{user `no_proxy`}}"
       ],
-      "execute_command": "sh -eux '{{.Path}}'",
+      "execute_command": "bash -eux '{{.Path}}'",
       "scripts": [
         "scripts/geco/desktop-user-prefs.sh"
       ],
