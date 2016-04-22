@@ -1,0 +1,22 @@
+#!/bin/bash
+
+cat <<MSG
+This little script will authenticate you using kerberos and ligo-proxy-init.
+echo "This should be sufficient for accessing LIGO DataGrid, NDS2 servers, and
+so on.
+MSG
+
+# prompt for username and password
+while true; do
+    read -p "Your LIGO username: " uname
+    read -s -p "Password: " pword
+    yes "$pword" | kinit "$uname"@LIGO.ORG
+    if [ $? -eq 0 ]; then
+        break
+    fi
+done
+
+# now that kerberos has succeeded, use those credentials for ligo-proxy-init
+ligo-proxy-init -k
+
+exit
