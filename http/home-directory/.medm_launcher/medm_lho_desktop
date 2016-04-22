@@ -1,5 +1,8 @@
 #!/bin/bash
 
+# find a default username
+uname=$(klist | sed -n 's/^.*principal: \([^@]*\)@.*$/\1/p')
+
 # build the PATH variable from scratch, since our environment seems funky
 export PATH='/opt/epics/extensions/bin/linux-x86_64:/home/vagrant/bin':"$(
     sed -n 's/^PATH="\([^"]*\)"$/\1/p' \
@@ -7,5 +10,9 @@ export PATH='/opt/epics/extensions/bin/linux-x86_64:/home/vagrant/bin':"$(
 )" 
 echo "Launching MEDM screens for LHO."
 echo "Press Control-C to quit."
-read -p "Your LIGO username: " uname
+if [ "$uname" = "" ]; then
+    read -p "Your LIGO username: " uname
+else
+    echo "Found kerberos username: $uname"
+fi
 medm_lho -u "${uname}"
