@@ -26,10 +26,13 @@ That's it! See more instructions and tips below.
   - [Contents](#contents)
   - [Introduction](#introduction)
   - [Using the Virtual Machine](#using-the-virtual-machine)
-      - [GUI vs. No-GUI](gui-vs-no-gui)
+      - [GUI vs. No-GUI](#gui-vs-no-gui)
       - [Installing and Getting Started](#installing-and-getting-started)
       - [Updating to the Latest Version of the VM](#updating-to-the-latest-version-of-the-vm)
   - [Pro Tips](#pro-tips)
+      - [Vagrant Best Practices](#vagrant-best-practices)
+      - [Adding Custom Scripts](#adding-custom-scripts)
+      - [Previewing Images with iTerm2](#previewing-images-with-iterm2)
   - [Developing the Base Image](#developing-the-base-image)
   - [Acknowledgements](#acknowledgements)
   - [More information on Vagrant](#more-information-on-vagrant)
@@ -99,7 +102,8 @@ get a short list of available commands for managing this VM.
 
 ```bash
 vagrant destroy -f
-vagrant box remove -f --all stefco/geco-vm
+# if you are using the headless geco-vm, write geco-vm instead of geco-vm-gui
+vagrant box remove -f --all stefco/geco-vm-gui
 vagrant up
 ```
 
@@ -117,12 +121,14 @@ following:
 
  1. Checks whether you already have a copy of `stefco/geco-vm` saved in vagrant's
     cache of vagrant boxes
- 2. Downloads the latest copy of `stefco/geco-vm` if you do not have a local
-    copy; if you **do** have a local copy, **even if it is outdated**, vagrant
-    will use that one
- 3. Decompresses and copies your local copy of the `stefco/geco-vm` box and
-    stores that fresh copy of the virtual machine in the `~/Virtualbox\ VMs`
-    directory; this copy will be the virtual machine you use
+ 2. Downloads the latest copy of `stefco/geco-vm-gui` or `stefco/geco-vm`
+    (depending on which you are using) if you do not have a local copy; if you
+    **do** have a local copy, **even if it is outdated**, vagrant will use that
+    one
+ 3. Decompresses and copies your local copy of the `stefco/geco-vm-gui` or
+    `stefco/geco-vm` box and stores that fresh copy of the virtual machine in the
+    `~/Virtualbox\ VMs` directory; this copy will be the virtual machine you
+    use
  4. Starts up the new machine
  5. Runs any provisioning scripts that you specify
     (which allow you to further customize the box before you use it)
@@ -145,7 +151,8 @@ machine and run:
 
 ```bash
 vagrant destroy -f
-vagrant box remove -f --all stefco/geco-vm
+# if you are using the headless geco-vm, write geco-vm instead of geco-vm-gui
+vagrant box remove -f --all stefco/geco-vm-gui
 vagrant up
 ```
 
