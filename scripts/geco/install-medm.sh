@@ -128,3 +128,6 @@ echo export PATH=\$PATH:/opt/epics/extensions/bin/$EPICS_HOST_ARCH/ >> $HOME/.ba
 rm -rf /opt/epics/distfiles
 cd /opt/epics/base && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
 cd /opt/epics/extensions && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
+
+# Make sure we recognize LHO and LLO epics channels in known_hosts
+ssh-keyscan lhoepics.ligo-wa.caltech.edu lloepics.ligo-la.caltech.edu >> .ssh/known_hosts

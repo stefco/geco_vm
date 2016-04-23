@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Terminal=true
+Terminal=false
 Name=auth
 Icon=/home/vagrant/.medm_launcher/auth-icon.png
 Exec=/home/vagrant/.medm_launcher/auth_desktop

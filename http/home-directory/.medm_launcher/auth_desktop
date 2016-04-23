@@ -1,16 +1,35 @@
 #!/bin/bash
 
-cat <<MSG
+read -r -d '' msg <<MSG
 This little script will authenticate you using kerberos and ligo-proxy-init.
-echo "This should be sufficient for accessing LIGO DataGrid, NDS2 servers, and
-so on.
+This should be sufficient for accessing LIGO DataGrid, NDS2 servers, and so on.
 MSG
 
-# prompt for username and password
+get_creds () {
+    # run a GUI-based username/password prompt
+    zenity --forms \
+        --text="${msg}" \
+        --add-entry='LIGO Username (e.g. Albert Einstein)' \
+        --add-password='LIGO Password' \
+        --separator=$'\n'
+}
+
+# prompt for username and password; retry in event of failure
 while true; do
-    read -p "Your LIGO username: " uname
-    read -s -p "Password: " pword
+    creds="$(get_creds)"
+    case $? in
+        0)
+            uname=$(echo "$creds" | cut -d $'\n' -f1)
+            pword=$(echo "$creds" | cut -d $'\n' -f2)
+        ;;
+        # exit if the user cancels (this returns a value of 1)
+        1) exit ;;
+    esac
+    zenity --info \
+        --text "Authenticating... (should take a few seconds)" &
+    notification_window_pid=$!
     yes "$pword" | kinit "$uname"@LIGO.ORG
+    # if authentication failed, ask for credentials again
     if [ $? -eq 0 ]; then
         break
     fi
@@ -18,5 +37,12 @@ done
 
 # now that kerberos has succeeded, use those credentials for ligo-proxy-init
 ligo-proxy-init -k
+
+kill "${notification_window_pid}"
+if [ $? -eq 0 ]; then
+    zenity --info --text='Authentication succeeded!' --timeout=3
+else
+    zenity --error --text='ligo-proxy-init authentication failed. Try again or report bug on GitHub.'
+fi
 
 exit

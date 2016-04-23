@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
-Terminal=true
+Terminal=false
 Name=medm-lho
 Icon=/home/vagrant/.medm_launcher/medm-lho-icon.png
 Exec=/home/vagrant/.medm_launcher/medm_lho_desktop
