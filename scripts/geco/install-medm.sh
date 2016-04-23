@@ -130,4 +130,5 @@ cd /opt/epics/base && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
 cd /opt/epics/extensions && ls | sed '/bin/d' | sed '/lib/d' | xargs rm -rf
 
 # Make sure we recognize LHO and LLO epics channels in known_hosts
-ssh-keyscan lhoepics.ligo-wa.caltech.edu lloepics.ligo-la.caltech.edu >> .ssh/known_hosts
+mkdir -p "${HOME}"/.ssh
+ssh-keyscan lhoepics.ligo-wa.caltech.edu lloepics.ligo-la.caltech.edu >> "${HOME}"/.ssh/known_hosts
