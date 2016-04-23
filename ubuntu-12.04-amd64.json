@@ -117,16 +117,10 @@
       "type": "file"
     },
     {
-      "destination": "/tmp/.bashrc",
-      "source": "{{user `home-directory`}}/.bashrc",
+      "destination": "/tmp/HOME",
+      "source": "{{user `home-directory`}}",
       "type": "file"
     },
-    {
-      "destination": "/tmp/bin",
-      "source": "{{user `home-directory`}}/bin",
-      "type": "file"
-    },
-    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "HOME=/home/vagrant",
