@@ -20,5 +20,12 @@ if ! [ -e "$HOME"/bin ]; then
     mkdir "$HOME"/bin
 fi
 
+# make bin executable and add to PATH
 chmod +x -R "$HOME"/bin
 echo export PATH=\"/vagrant:${HOME}/bin:\$PATH\" >> ~/.bashrc
+
+# make desktop files executable
+chmod -R +x "${HOME}"/.medm_launcher/*desktop
+
+# change ownership of home folder to vagrant
+chown -R vagrant "${HOME}"
