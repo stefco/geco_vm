@@ -121,6 +121,7 @@
       "source": "{{user `home-directory`}}",
       "type": "file"
     },
+    {
       "environment_vars": [
         "HOME_DIR=/home/vagrant",
         "HOME=/home/vagrant",
