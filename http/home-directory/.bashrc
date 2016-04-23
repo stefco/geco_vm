@@ -20,6 +20,10 @@ For help with LIGO DataGrid, LigoDV, using a GUI, etc., run
 
     geco-help
 
+To authenticate using kinit and ligo-proxy-init in one command, run
+
+    ligo-auth
+
 Email stefan.countryman@ligo.org with questions or suggestions.
 
 __WELCOME_MESSAGE__
