@@ -135,6 +135,7 @@
         "scripts/geco/no-docs.sh",
         "scripts/ubuntu/update.sh",
         "scripts/geco/move-files.sh",
+        "scripts/geco/install-geco-software.sh",
         "scripts/geco/provision.sh"
       ],
       "type": "shell"

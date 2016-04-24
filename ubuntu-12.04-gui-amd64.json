@@ -117,6 +117,7 @@
         "scripts/common/metadata.sh",
         "scripts/ubuntu/update.sh",
         "scripts/geco/move-files.sh",
+        "scripts/geco/install-geco-software.sh",
         "scripts/geco/desktop.sh",
         "scripts/geco/provision.sh"
       ],
