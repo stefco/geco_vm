@@ -1,0 +1,34 @@
+#!/bin/bash
+
+usage () {
+cat <<USAGE
+USAGE: ligo-auth-get-username [-h]
+
+if the current user is authenticated, print the LIGO username they used to
+authenticate. otherwise print nothing (stderr is quiet, too). takes no
+arguments. returns 0 if user found, 1 otherwise, making it nice for
+quick tests.
+
+OPTIONS:
+
+    -h    display this help text.
+
+USAGE
+}
+
+if [ "$1" = "-h" ]; then
+    usage
+    exit
+fi
+
+uname=$(
+    klist 2>/dev/null \
+        | sed -n 's/^.*principal: \([^@]*\)@LIGO\.ORG.*$/\1/p'
+)
+
+if [ "${uname}" = "" ]; then
+    exit 1
+else
+    echo "${uname}"
+    exit
+fi
