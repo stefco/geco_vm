@@ -6,7 +6,8 @@ mv /tmp/epics /opt
 
 # for .bashrc, just concatenate it onto the default .bashrc
 if [ -e /tmp/HOME/.bashrc ]; then
-    cat "${HOME}"/.bashrc /tmp/HOME/.bashrc > /tmp/HOME/.bashrc
+    cat "${HOME}"/.bashrc /tmp/HOME/.bashrc > /tmp/bashrc-tmp \
+        && mv /tmp/bashrc-tmp /tmp/HOME/.bashrc
 fi
 
 # copy the rest of the stuff in the home directory recursively
