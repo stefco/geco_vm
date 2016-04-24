@@ -1,0 +1,85 @@
+#!/bin/bash
+
+# install and update geco development repositories
+
+set -o nounset
+set -o errexit
+
+usage () {
+    cat <<USAGE
+USAGE: geco-soft-dev-update [ -P | -h ]
+
+Check whether geco software repositories have been cloned from git. If
+not, they are cloned. If so, they are updated. Repositories are kept in
+~/geco by default.
+
+OPTIONS:
+
+    -h      show this help dialog
+
+    -P      only output progress percentage while downloading
+
+USAGE
+}
+
+print_progress=false
+# show help if they ask for it
+opt=${1:-""}
+if [ "$opt" = "-h" ]; then
+    usage
+    exit
+elif [ "$opt" = "-P" ]; then
+    print_progress=true
+fi
+
+# an array of repositories to clone; ASSUMED TO BE ON GITHUB BY DEFAULT
+repositories=(
+    "stefco/geco_vm"
+    "stefco/geco_data"
+    "stefco/geco_plots"
+    "stefco/geco_channels"
+    "stefco/geco_stat"
+)
+num_repositories=${#repositories[@]}
+
+# function for updating repos (or cloning them if necessary)
+update_repository () {
+    local repository="$1"
+
+    # if it is just a shorthand git repository, fill it in
+    if ! [[ "${repository}" =~ http.*\.git ]]; then
+        echo "# Repository seems to be on GitHub: ${repository}"
+        repository='https://github.com/'"${repository}"'.git'
+        echo "# Setting URL to ${repository}"
+    else
+        echo "# Repository URL seems to be valid: ${repository}"
+    fi
+    local repository_name=$(sed 's_^.*/\([^/^.]*\)\.git_\1_' <<<"${repository}")
+    echo "# Repository name seems to be: ${repository_name}"
+    local repository_dir="${HOME}"/geco/"${repository_name}"
+    echo "# Repository should be installed in ${repository_dir}"
+
+    # check whether the repository has been cloned already
+    mkdir -p "${HOME}"/geco
+    if [ -d "${HOME}"/geco/"${repository_name}" ]; then
+        echo "# ${repository_name} exists, pulling latest code (should fail if unsaved changes exist)."
+        cd "${repository_dir}" && git pull
+    else
+        echo "# ${repository_name} does NOT exist; cloning now."
+        cd "${HOME}"/geco && git clone "${repository}"
+    fi
+}
+
+# update all repos
+finished_repositories=0
+for repository in ${repositories[*]}; do
+    if ${print_progress}; then
+        update_repository "${repository}" > /dev/null
+        finished_repositories=$(( finished_repositories + 1 ))
+        echo $(( finished_repositories * 100 / num_repositories ))
+    else
+        update_repository "${repository}"
+        finished_repositories=$(( finished_repositories + 1 ))
+        echo $(( finished_repositories * 100 / num_repositories ))
+    fi
+done
