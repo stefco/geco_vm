@@ -1,6 +1,3 @@
-# move medm_launcher into place
-cp -R /tmp/.medm_launcher "$HOME"/.medm_launcher
-
 # install the unity desktop environment
 apt-get -y -qq install ubuntu-desktop
 
