@@ -1,0 +1,15 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=Update All GECo Software
+Icon=/home/vagrant/.medm_launcher/geco-soft.png
+Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && zenity --info --text="Done updating GECo Software development repositories!" --title="Updating" --timeout=5'
+Actions=UpdateExecutables;UpdateDev
+
+[Desktop Action UpdateExecutables]
+Name=Update Installed GECo Executables
+Exec=zenity --error --text="Not yet implemented."
+
+[Desktop Action UpdateDev]
+Name=Update git GECo Development Repositories
+Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && zenity --info --text="Done updating GECo Software development repositories!" --title="Updating" --timeout=5'

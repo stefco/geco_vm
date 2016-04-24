@@ -33,3 +33,4 @@ __WELCOME_MESSAGE__
 #     sudo apt-get -y update && sudo apt-get -y upgrade
 
 alias notebook="jupyter notebook --no-browser --ip=0.0.0.0"
+export EDITOR=vim
