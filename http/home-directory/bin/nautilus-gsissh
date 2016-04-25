@@ -1,0 +1,50 @@
+#!/bin/bash
+# April 24, 2016 Stefan Countryman
+
+usage () {
+    cat <<USAGE
+USAGE: nautilus-gsissh [ -h ] <hostname>
+
+Open up a master gsissh connection in the background (assuming .ssh/config
+settings are correct). Then, connect to your home directory on the remote
+host using nautilus.
+
+Your git config for the <hostname> must be as follows:
+
+    Host <hostname>
+        HostName <hostname>
+        ControlMaster auto
+        ControlPath ~/.ssh/control:%h:%p:%r
+
+...where, of course, the <hostname> is the server you are connecting to,
+e.g. ldas-pcdev1.ligo.caltech.edu.
+
+OPTIONS:
+
+    -h      display this help dialog.
+
+USAGE
+}
+
+if [ "$1" = "-h" ]; then
+    usage
+    exit
+fi
+
+hostname="$1"
+
+# if we are not authenticated, raise a warning
+username="$(ligo-auth-get-username)" \
+    || zenity \
+           --error \
+           --text="You are not authenticated; use LIGO AUTH to remedy this." \
+    && exit 1
+zenity --info --text="Connecting (should be quick)"
+zpid=$!
+
+# start the master connection.
+gsissh -f -N -o "ControlPersist=yes" "${hostname}"
+
+# open the nautilus browser connection
+nautilus sftp://"${hostname}"/home/"${username}"
+kill "${zpid}"
