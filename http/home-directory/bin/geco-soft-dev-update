@@ -22,6 +22,9 @@ OPTIONS:
 USAGE
 }
 
+# tell the user if this fails
+trap "zenity --error --title='GECo Soft Dev Update' --text='Failed! Whoops!'" INT TERM EXIT
+
 print_progress=false
 # show help if they ask for it
 opt=${1:-""}
@@ -63,10 +66,12 @@ update_repository () {
     mkdir -p "${HOME}"/geco
     if [ -d "${HOME}"/geco/"${repository_name}" ]; then
         echo "# ${repository_name} exists, pulling latest code (should fail if unsaved changes exist)."
-        cd "${repository_dir}" && git pull
+        cd "${repository_dir}"
+        git pull
     else
         echo "# ${repository_name} does NOT exist; cloning now."
-        cd "${HOME}"/geco && git clone "${repository}"
+        cd "${HOME}"/geco
+        git clone "${repository}"
     fi
 }
 
@@ -83,3 +88,5 @@ for repository in ${repositories[*]}; do
         echo $(( finished_repositories * 100 / num_repositories ))
     fi
 done
+
+trap - INT TERM EXIT
