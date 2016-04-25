@@ -3,13 +3,13 @@ Type=Application
 Terminal=false
 Name=Update GECo Software
 Icon=/home/vagrant/.medm_launcher/geco-soft.png
-Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && zenity --info --text="Done updating GECo Software development repositories!" --title="Updating" --timeout=5'
-Actions=UpdateExecutables;UpdateDev
-
-[Desktop Action UpdateExecutables]
-Name=Update Installed GECo Executables
-Exec=zenity --error --text="Not yet implemented."
+Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && (/home/vagrant/bin/geco-soft-link || (zenity --error --title="Linking GECo Executables" --text="Error while linking executables from ~/geco to ~/bin!" && exit 1)) && zenity --info --text="Done updating and linking GECo Software development repositories!" --title="Updating" --timeout=5'
+Actions=UpdateDev;LinkExecutables
 
 [Desktop Action UpdateDev]
-Name=Update git GECo Development Repositories
+Name=Update GECo Development Repositories and Executables
 Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && zenity --info --text="Done updating GECo Software development repositories!" --title="Updating" --timeout=5'
+
+[Desktop Action LinkExecutables]
+Name=Re-link GECo Executables
+Exec=bash -c '(/home/vagrant/bin/geco-soft-link || (zenity --error --title="Linking GECo Executables" --text="Error while linking executables from ~/geco to ~/bin!" && exit 1)) && zenity --info --title="Linking GECo Executables" --text="Success!" --timeout=3'
