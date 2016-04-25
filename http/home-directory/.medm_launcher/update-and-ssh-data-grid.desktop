@@ -1,0 +1,6 @@
+[Desktop Entry]
+Type=Application
+Terminal=false
+Name=Update GECo Software and Connect with SSH to Remote DataGrid Server
+Icon=/home/vagrant/.medm_launcher/update-and-ssh-data-grid.png
+Exec=zenity --info --text="Right click on the DataGrid Terminal icon and pick a server to connect to."

@@ -1,0 +1,61 @@
+#!/bin/bash
+# April 25, 2016 Stefan Countryman
+
+set -o errexit
+set -o nounset
+set -o noclobber
+
+usage () {
+    cat <<USAGE
+USAGE: geco-soft-update-and-connect [ -h ] <hostname>
+
+Install and/or update GECo software on a remote host using GSI authentication,
+then connect to the remote host.
+
+  - downloads installation/update scripts on a remote host
+  - runs them and prints current progress
+  - makes sure that ~/bin is in PATH on the remote host
+  - opens a terminal with an ssh connection to the host
+
+This is useful for when you need to work on a remote host and want to easily
+make sure it is using the same GECo software as your computer.
+
+OPTIONS:
+
+    -h      display this help dialog.
+
+USAGE
+}
+
+if [ "$1" = "-h" ]; then
+    usage
+    exit
+fi
+
+hostname="$1"
+
+# raise an error if we are not authenticated
+ligo-auth-get-username > /dev/null \
+    || (echo "No kerberos credentials found, exiting..." >&2 && exit 1)
+
+# update on remote
+gsissh "${hostname}" "
+    set -o errexit
+    echo '# making sure install scripts are present...'
+    mkdir -p ~/bin
+    if ! [ -e ~/bin/geco-soft-dev-update ]; then
+        wget -O ~/bin/geco-soft-dev-update https://raw.githubusercontent.com/stefco/geco_vm/master/http/home-directory/bin/geco-soft-dev-update >&2
+        chmod +x ~/bin/geco-soft-dev-update
+    fi
+    if ! [ -e ~/bin/geco-soft-link ]; then
+        wget -O ~/bin/geco-soft-link https://raw.githubusercontent.com/stefco/geco_vm/master/http/home-directory/bin/geco-soft-link >&2
+        chmod +x ~/bin/geco-soft-link
+    fi
+    # install/update/link software
+    ~/bin/geco-soft-dev-update
+    ~/bin/geco-soft-link
+    # make sure ~/bin is part of PATH in .bashrc
+    grep -q 'export PATH=~/bin:"'$PATH'"' ~/.bashrc \
+        || echo 'export PATH=~/bin:"'$PATH'"' >> ~/.bashrc
+    rm -rf ~/.bashrc.old
+"

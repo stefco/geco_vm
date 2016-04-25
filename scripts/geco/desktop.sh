@@ -9,3 +9,6 @@ user-session=ubuntu
 autologin-user=vagrant
 autologin-user-timeout=0
 LIGHTDM_CONF
+
+# install gimp
+apt-get -y -qq install gimp
