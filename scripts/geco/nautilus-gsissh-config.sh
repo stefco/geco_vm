@@ -34,7 +34,7 @@ done
 chown -R vagrant "${HOME}"/.ssh
 chmod 600 "${HOME}"/.ssh/config
 
-# Add these as right-click options to the desktop launcher
+# Add these as right-click options to the desktop launcher for nautilus
 app="${HOME}"/.medm_launcher/browse-data-grid.desktop
 
 # The name of each action is just the host URL:
@@ -46,4 +46,20 @@ for host in ${hosts[*]}; do
     echo "[Desktop Action ${host}]"  >> "${app}"
     echo "Name=Browse Home Folder on ${host}" >> "${app}"
     echo "Exec=nautilus-gsissh ${host}" >> "${app}"
+done
+
+# Add these as right-click options to the desktop launcher for updating and
+# starting an SSH connection
+app="${HOME}"/http/home-directory/.medm_launcher/update-and-ssh-data-grid.desktop
+cmd="Exec=bash -c 'geco-soft-dev-update-remote ""${host}"" | /usr/bin/zenity --progress --title=\"Updating GECo Software Before Connecting...\" --text=\"Updating software on ${host}...\" --percentage=0 --auto-close --auto-kill; gnome-terminal -x gsissh ${host} & disown'"
+
+# The name of each action is just the host URL:
+echo "Actions="$(sed 's/ /;/g' <<<"${hosts[@]}") >> "${app}"
+
+# create an action for each of these host URLs
+for host in ${hosts[*]}; do
+    echo >> "${app}"
+    echo "[Desktop Action ${host}]"  >> "${app}"
+    echo "Name=Update GECo Software and Connect with SSH on ${host}"  >> "${app}"
+    echo "${cmd}" >> "${app}"
 done

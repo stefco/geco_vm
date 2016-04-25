@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
 Terminal=false
-Name=Browse Home Folder on Remote DataGrid Computer
+Name=Browse Home Folder on Remote DataGrid Server
 Icon=/home/vagrant/.medm_launcher/browse-data-grid.png
-Exec=zenity --info --text="Right click on the DataGrid icon and pick a server to connect to."
+Exec=zenity --info --text="Right click on the DataGrid Folder icon and pick a server to connect to."

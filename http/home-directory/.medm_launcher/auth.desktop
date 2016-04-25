@@ -1,6 +1,6 @@
 [Desktop Entry]
 Type=Application
 Terminal=false
-Name=auth
+Name=Log In with Kerberos and ligo-proxy-init using LIGO credentials
 Icon=/home/vagrant/.medm_launcher/auth-icon.png
 Exec=/home/vagrant/.medm_launcher/auth_desktop
