@@ -1,6 +1,10 @@
 #!/bin/bash
 # April 24, 2016 Stefan Countryman
 
+set -o errexit
+set -o nounset
+set -o noclobber
+
 usage () {
     cat <<USAGE
 USAGE: nautilus-gsissh [ -h ] <hostname>
@@ -34,12 +38,15 @@ fi
 hostname="$1"
 
 # if we are not authenticated, raise a warning
-username="$(ligo-auth-get-username)" \
-    || zenity \
-           --error \
-           --text="You are not authenticated; use LIGO AUTH to remedy this." \
-    && exit 1
-zenity --info --text="Connecting (should be quick)"
+username="$(ligo-auth-get-username)"
+if ! [ $? -eq 0 ]; then
+    zenity \
+       --error \
+       --text="You are not authenticated; use LIGO AUTH to remedy this."
+    echo No ligo credentials found!
+    exit 1
+fi
+zenity --info --text="Connecting (should be quick)" &
 zpid=$!
 
 # start the master connection.
