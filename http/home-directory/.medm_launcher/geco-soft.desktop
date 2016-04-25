@@ -1,7 +1,7 @@
 [Desktop Entry]
 Type=Application
 Terminal=false
-Name=Update All GECo Software
+Name=Update GECo Software
 Icon=/home/vagrant/.medm_launcher/geco-soft.png
 Exec=bash -c '/home/vagrant/bin/geco-soft-dev-update | /usr/bin/zenity --progress --title="Updating GECo Software development repositories..." --text="Updating..." --percentage=0 --auto-close --auto-kill && zenity --info --text="Done updating GECo Software development repositories!" --title="Updating" --timeout=5'
 Actions=UpdateExecutables;UpdateDev

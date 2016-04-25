@@ -136,7 +136,8 @@
         "scripts/ubuntu/update.sh",
         "scripts/geco/move-files.sh",
         "scripts/geco/provision.sh",
-        "scripts/geco/install-geco-software.sh"
+        "scripts/geco/install-geco-software.sh",
+        "scripts/geco/nautilus-gsissh-config.sh"
       ],
       "type": "shell"
     },
