@@ -29,19 +29,23 @@ while true; do
         --text "Authenticating... (should take a few seconds)" &
     notification_window_pid=$!
     yes "$pword" | kinit "$uname"@LIGO.ORG
-    # if authentication failed, ask for credentials again
+    # if authentication failed ask for credentials again
     if [ $? -eq 0 ]; then
         break
+    else
+        # kill notification window
+        kill "${notification_window_pid}"
     fi
 done
 
 # now that kerberos has succeeded, use those credentials for ligo-proxy-init
 ligo-proxy-init -k
 
-kill "${notification_window_pid}"
 if [ $? -eq 0 ]; then
+    kill "${notification_window_pid}"
     zenity --info --text='Authentication succeeded!' --timeout=3
 else
+    kill "${notification_window_pid}"
     zenity --error --text='ligo-proxy-init authentication failed. Try again or report bug on GitHub.'
 fi
 
