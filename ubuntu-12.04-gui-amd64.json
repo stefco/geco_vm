@@ -120,7 +120,7 @@
         "scripts/geco/desktop.sh",
         "scripts/geco/provision.sh",
         "scripts/geco/install-geco-software.sh",
-        "scripts/geco/nautilus-gsissh-config.sh"
+        "scripts/geco/datagrid-host-config.sh"
       ],
       "type": "shell"
     },

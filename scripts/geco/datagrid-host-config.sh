@@ -50,7 +50,7 @@ done
 
 # Add these as right-click options to the desktop launcher for updating and
 # starting an SSH connection
-app="${HOME}"/http/home-directory/.medm_launcher/update-and-ssh-data-grid.desktop
+app="${HOME}"/.medm_launcher/update-and-ssh-data-grid.desktop
 cmd="Exec=bash -c 'geco-soft-dev-update-remote ""${host}"" | /usr/bin/zenity --progress --title=\"Updating GECo Software Before Connecting...\" --text=\"Updating software on ${host}...\" --percentage=0 --auto-close --auto-kill; gnome-terminal -x gsissh ${host} & disown'"
 
 # The name of each action is just the host URL:
