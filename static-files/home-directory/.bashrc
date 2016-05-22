@@ -88,4 +88,4 @@ function parse_git_dirty {
 	fi
 }
 
-export PS1="\[\e[37;44m\] \u \[\e[m\]\[\e[37;42m\] \H \[\e[m\]\[\e[37;41m\] \w \[\e[m\]\[\e[45m\]\`parse_git_branch\`\[\e[m\]\[\e[30;47m\]\`nonzero_return\`\[\e[m\]\[\e[30;47m\] > \[\e[m\] "
+export PS1="\[\e[37;44m\] GECo \[\e[m\]\[\e[37;41m\] \w \[\e[m\]\[\e[37;42m\]\`parse_git_branch\`\[\e[m\]\[\e[30;47m\]\`nonzero_return\`\[\e[m\]\[\e[30;47m\] > \[\e[m\] "
