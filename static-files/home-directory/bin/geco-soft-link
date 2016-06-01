@@ -24,6 +24,8 @@ USAGE
 # script will search for these files in ~/geco.
 executables=(
     "geco_data/geco_dump"
+    "geco_data/geco_trend_dump"
+    "geco_data/geco_get_operational_segments"
     "geco_data/geco_irig_decode"
     "geco_data/geco_irig_decode_test"
     "geco_data/geco_irig_plot"
