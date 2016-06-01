@@ -35,7 +35,7 @@ executables=(
 
 link_executable () {
     local executable_path="$1"
-    local executable="$(sed 's_^[^/]*/\(.*\)$_\1_' <<<"${executable_path}")"
+    local executable="$(basename "${executable_path}")"
     mkdir -p "${HOME}"/bin
     if [ -e "${HOME}"/geco/"${executable_path}" ]; then
         if [ -e "${HOME}"/bin/"${executable}" ]; then
