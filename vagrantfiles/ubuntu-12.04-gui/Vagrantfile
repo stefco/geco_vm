@@ -9,6 +9,7 @@ Vagrant.configure(2) do |config|
   ## These two blocks 1. name the machine and 2. tell Vagrant to use the
   ## geco-vm virtual machine image (a.k.a. "vagrant box") as a starting point.
   config.vm.box = "stefco/geco-vm-gui"
+  config.vm.box_version = "= 0.25"
 
   ## If you want to run x11 applications in geco-vm and access them without the
   ## virtualbox gui, you can UNCOMMENT these two lines to enable x11 forwarding.
