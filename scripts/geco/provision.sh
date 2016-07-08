@@ -184,6 +184,7 @@ aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q insta
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install nds2-client || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install python-nds2-client || true
 aptitude --no-gui -o Aptitude::Cmdline::ignore-trust-violations=true -y -q install lalapps || true
+apt-get -y -qq install python-ligo-gracedb
 # generate cookies at command line
 apt-get -y -qq install ecp-cookie-init
 # access segment lists
