@@ -95,16 +95,6 @@
       "type": "shell"
     },
     {
-      "destination": "/tmp/geco-metadata.json",
-      "source": "{{user `metadata`}}",
-      "type": "file"
-    },
-    {
-      "destination": "/tmp/epics",
-      "source": "{{user `epics`}}",
-      "type": "file"
-    },
-    {
       "destination": "/tmp/HOME",
       "source": "{{user `home-directory`}}",
       "type": "file"
@@ -119,16 +109,13 @@
       ],
       "execute_command": "echo 'vagrant' | {{.Vars}} sudo -S -E sh -eux '{{.Path}}'",
       "scripts": [
-        "scripts/common/metadata.sh",
         "scripts/debian/update.sh",
         "scripts/common/sshd.sh",
         "scripts/debian/networking.sh",
         "scripts/debian/sudoers.sh",
         "scripts/common/vagrant.sh",
         "scripts/common/virtualbox.sh",
-        "scripts/common/vmware.sh",
         "scripts/debian/systemd.sh",
-        "scripts/common/parallels.sh",
         "scripts/debian/cleanup.sh",
         "scripts/common/minimize.sh"
       ],
