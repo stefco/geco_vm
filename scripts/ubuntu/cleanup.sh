@@ -58,9 +58,11 @@ cat <<__MSG__
 __MSG__
 # Delete development packages
 # do not remove julia dev packages; they are required
+# do not remove ubuntu packages
 dpkg --list \
     | awk '{ print $2 }' \
     | grep -- '-dev$' \
+    | sed '/ubuntu/d'
     | sed '/julia/d' \
     | xargs apt-get -y purge;
 

@@ -2,7 +2,7 @@
 
 cat <<MSG
 This little script will authenticate you using kerberos and ligo-proxy-init.
-echo "This should be sufficient for accessing LIGO DataGrid, NDS2 servers, and
+This should be sufficient for accessing LIGO DataGrid, NDS2 servers, and
 so on.
 MSG
 

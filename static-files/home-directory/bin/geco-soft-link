@@ -24,6 +24,8 @@ USAGE
 # script will search for these files in ~/geco.
 executables=(
     "geco_data/geco_dump"
+    "geco_data/geco_trend_dump"
+    "geco_data/geco_get_operational_segments"
     "geco_data/geco_irig_decode"
     "geco_data/geco_irig_decode_test"
     "geco_data/geco_irig_plot"
@@ -33,7 +35,7 @@ executables=(
 
 link_executable () {
     local executable_path="$1"
-    local executable="$(sed 's_^[^/]*/\(.*\)$_\1_' <<<"${executable_path}")"
+    local executable="$(basename "${executable_path}")"
     mkdir -p "${HOME}"/bin
     if [ -e "${HOME}"/geco/"${executable_path}" ]; then
         if [ -e "${HOME}"/bin/"${executable}" ]; then
