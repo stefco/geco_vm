@@ -1,9 +1,5 @@
 # when installing with packer, move files from /tmp
 
-# put EPICS files where they need to be for installation
-mkdir -p /opt
-mv /tmp/epics /opt
-
 # for .bashrc, concatenate the default OS .bashrc to the start
 if [ -e /tmp/HOME/.bashrc ]; then
     cat "${HOME}"/.bashrc /tmp/HOME/.bashrc > /tmp/bashrc-tmp \
