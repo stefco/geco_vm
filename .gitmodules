@@ -1,0 +1,3 @@
+[submodule "scripts/geco"]
+	path = scripts/geco
+	url = https://github.com/stefco/geco_env.git
