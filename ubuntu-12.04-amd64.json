@@ -4,7 +4,7 @@
       "type": "digitalocean",
       "snapshot_name": "geco-vm-{{timestamp}}",
       "api_token": "{{user `digitalocean_api_key`}}",
-      "region": "nyc3",
+      "region": "nyc1",
       "size": "512mb",
       "image": "ubuntu-12-04-x64"
     },
@@ -181,6 +181,7 @@
   "variables": {
     "box_basename": "ubuntu-12.04",
     "build_timestamp": "{{isotime \"20060102150405\"}}",
+    "digitalocean_api_key": "{{env `DIGITALOCEAN_API_KEY`}}",
     "git_revision": "__unknown_git_revision__",
     "headless": "",
     "http_proxy": "{{env `http_proxy`}}",
