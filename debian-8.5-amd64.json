@@ -1,6 +1,14 @@
 {
   "builders": [
     {
+      "type": "digitalocean",
+      "snapshot_name": "geco-vm-{{timestamp}}",
+      "api_token": "{{user `digitalocean_api_key`}}",
+      "region": "nyc1",
+      "size": "512mb",
+      "image": "debian-8-x64"
+    },
+    {
       "type": "virtualbox-iso",
       "boot_command": [
         "<esc><wait>",
@@ -55,10 +63,20 @@
     }
   ],
   "post-processors": [
-    {
+    [{
       "output": "builds/{{user `box_basename`}}.{{.Provider}}.box",
       "type": "vagrant"
-    }
+    },
+    {
+      "type": "atlas",
+      "only": ["virtualbox-iso"],
+      "artifact": "stefco/geco-deb",
+      "artifact_type": "vagrant.box",
+      "metadata": {
+        "provider": "virtualbox",
+        "created_at": "{{timestamp}}"
+      }
+    }]
   ],
   "provisioners": [
     {
@@ -95,6 +113,7 @@
     "box_basename": "debian-8.5",
     "build_timestamp": "{{isotime \"20060102150405\"}}",
     "cpus": "1",
+    "digitalocean_api_key": "{{env `DIGITALOCEAN_API_KEY`}}",
     "disk_size": "40960",
     "git_revision": "__unknown_git_revision__",
     "headless": "true",
