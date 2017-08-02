@@ -1,0 +1,8 @@
+title: Geco vm
+description: All the tools you need to work with LIGO, always up-to-date, in one easy Vagrant box.
+google_analytics: 
+show_downloads: true
+theme: jekyll-theme-minimal
+
+gems:
+  - jekyll-mentions
